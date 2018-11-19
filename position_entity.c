@@ -7,7 +7,7 @@
 // 
 // Move entity to target location with offset,
 // of to screen position if target is NULL().
-void dc_bind_shift_position()
+void dc_bind_apply_position()
 {
 	void ent;
 	void target;
@@ -39,8 +39,8 @@ void dc_bind_shift_position()
 	}
 
 	// Get offsets.
-	offset_x = dc_bind_get_offset_x();
-	offset_y = dc_bind_get_offset_x();
+	offset_x = dc_bind_find_scaled_offset_x();
+	offset_y = dc_bind_find_scaled_offset_y();
 	offset_z = dc_bind_get_offset_x();
 	
 	// Now apply position according to offset settings.
@@ -59,5 +59,6 @@ void dc_bind_shift_position()
 		pos_y += offset_z;
 	}
 
-	changeentityproperty()
+	// Apply the position change.
+	changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
 }
