@@ -70,7 +70,7 @@ void dc_bind_get_target()
 }
 
 // Set
-void dc_velocity_set_target(void value)
+void dc_bind_set_target(void value)
 {
 	int instance;
 
