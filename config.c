@@ -143,3 +143,34 @@ int dc_bind_set_offset_y(int value)
 
 	setlocalvar(instance + DC_BIND_VAR_KEY_OFFSET_Y, value);
 }
+
+// Z axis.
+// Get
+int dc_bind_get_offset_z()
+{
+	int instance;
+	int result;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_OFFSET_Z);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_BIND_DEFAULT_OFFSET_Z;
+	}
+
+	return result;
+}
+
+// Set
+int dc_bind_set_offset_z(int value)
+{
+	int instance;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	setlocalvar(instance + DC_BIND_VAR_KEY_OFFSET_Z, value);
+}
