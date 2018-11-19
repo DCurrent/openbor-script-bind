@@ -1,6 +1,7 @@
 #include "data/scripts/dc_bind/config.h"
 
 #import "data/scripts/dc_bind/config.c"
+#import "data/scripts/dc_bind/offsets.c"
 
 // Caskey, Damon V.
 // 2018-11-19
@@ -41,24 +42,25 @@ void dc_bind_apply_position()
 	// Get offsets.
 	offset_x = dc_bind_find_scaled_offset_x();
 	offset_y = dc_bind_find_scaled_offset_y();
-	offset_z = dc_bind_get_offset_x();
+	offset_z = dc_bind_get_offset_z();
 	
 	// Now apply position according to offset settings.
-	if (offset_x != DC_BIND_OFFSET_DISABLE)
-	{
+	//if (offset_x != DC_BIND_OFFSET_DISABLE)
+	//{
 		pos_x += offset_x;
-	}
+	//}
 
-	if (offset_y != DC_BIND_OFFSET_DISABLE)
-	{
+	//if (offset_y != DC_BIND_OFFSET_DISABLE)
+	//{
 		pos_y += offset_y;
-	}
+	//}
 
-	if (offset_x != DC_BIND_OFFSET_DISABLE)
-	{
-		pos_y += offset_z;
-	}
+	//if (offset_x != DC_BIND_OFFSET_DISABLE)
+	//{
+		pos_z += offset_z;
+	//}
 
 	// Apply the position change.
+	//changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
 	changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
 }
