@@ -1,2 +1,2 @@
-# openbor-script-bind
-Binding and location syncing control for OpenBOR script.
+# DC Bind
+Binding and location syncing control for OpenBOR script. Full Readme in progress.
