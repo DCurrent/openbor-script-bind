@@ -80,3 +80,35 @@ void dc_bind_set_target(void value)
 	setlocalvar(instance + DC_BIND_VAR_KEY_TARGET, value);
 }
 
+// Offsets
+
+// X axis.
+// Get
+int dc_bind_get_offset_x()
+{
+	int instance;
+	int result;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_OFFSET_X);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_BIND_DEFAULT_OFFSET_X;
+	}
+
+	return result;
+}
+
+// Set
+int dc_bind_set_offset_x(int value)
+{
+	int instance;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	setlocalvar(instance + DC_BIND_VAR_KEY_OFFSET_X, value);
+}
