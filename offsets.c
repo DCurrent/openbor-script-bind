@@ -93,19 +93,23 @@ int dc_bind_set_offset_z(int value)
 
 // Operations
 
-
+// Caskey, Damon V.
+// 2018-11-19
+//
+// Return an adjusted X offset to compensate for 
+// scaling effects target may have applied.
 int dc_bind_find_scaled_offset_x()
 {
 	void	target;
 	float	scale;
 	int		offset;
 
-	// Get target.
-	target = dc_bind_get_target();
-
+	// Get the offset.
 	offset = dc_bind_get_offset_x();
 
-	// Is target a valid entity?
+	// Is there a valid target entity?
+	target = dc_bind_get_target();
+
 	if (typeof(target) == openborconstant("VT_PTR"))
 	{
 		// Get target scale. If it's a valid number,
@@ -122,5 +126,45 @@ int dc_bind_find_scaled_offset_x()
 		// an offset that compensates for the
 		// target's current size.
 		offset *= scale;
-	}	
+	}
+
+	return offset;
+}
+
+// Caskey, Damon V.
+// 2018-11-19
+//
+// Return an adjusted X offset to compensate for 
+// scaling effects target may have applied.
+int dc_bind_find_scaled_offset_y()
+{
+	void	target;
+	float	scale;
+	int		offset;
+
+	// Get the offset.
+	offset = dc_bind_get_offset_y();
+
+	// Is there a valid target entity?
+	target = dc_bind_get_target();
+
+	if (typeof(target) == openborconstant("VT_PTR"))
+	{
+		// Get target scale. If it's a valid number,
+		// then divide it by max value to get a scale 
+		// percentage.
+		scale = getdrawmethod(target, "scaley");
+
+		if (scale)
+		{
+			scale = scale / 256;
+		}
+
+		// Multiple offset by scale percentage to get
+		// an offset that compensates for the
+		// target's current size.
+		offset *= scale;
+	}
+
+	return offset;
 }
