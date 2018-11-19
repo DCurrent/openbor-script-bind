@@ -39,7 +39,7 @@ void dc_bind_get_entity()
 }
 
 // Set
-void dc_velocity_set_entity(void value)
+void dc_bind_set_entity(void value)
 {
 	int instance;
 
