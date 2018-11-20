@@ -16,6 +16,7 @@ void dc_bind_apply_position()
 	int offset_x;
 	int offset_y;
 	int offset_z;
+	int direction;
 
 	float pos_x;
 	float pos_y;
@@ -47,6 +48,15 @@ void dc_bind_apply_position()
 	// Now apply position according to offset settings.
 	//if (offset_x != DC_BIND_OFFSET_DISABLE)
 	//{
+
+		// Invert X offset if target faces left.
+		direction = getentityproperty(target, "direction");
+
+		if (direction == openborconstant("DIRECTION_LEFT"))
+		{
+			offset_x = -offset_x;
+		}
+
 		pos_x += offset_x;
 	//}
 
