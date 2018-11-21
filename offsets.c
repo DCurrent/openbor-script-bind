@@ -119,7 +119,7 @@ int dc_bind_find_scaled_offset_x()
 
 		if (scale)
 		{
-			scale = scale / 256;
+			scale = scale / DC_BIND_DRAWMETHOD_SCALE_MAX_X;
 		}
 
 		// Multiple offset by scale percentage to get
@@ -157,10 +157,10 @@ int dc_bind_find_scaled_offset_y()
 
 		if (scale)
 		{
-			scale = scale / 256;
+			scale = scale / DC_BIND_DRAWMETHOD_SCALE_MAX_Y;
 		}
 
-		// Multiple offset by scale percentage to get
+		// Multiply offset by scale percentage to get
 		// an offset that compensates for the
 		// target's current size.
 		offset *= scale;

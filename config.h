@@ -35,4 +35,8 @@
 #define DC_BIND_VAR_KEY_OFFSET_Z	"dcbind_7"
 #define DC_BIND_VAR_KEY_TARGET		"dcbind_8"
 
+// Misc hard code values
+#define DC_BIND_DRAWMETHOD_SCALE_MAX_X 256
+#define DC_BIND_DRAWMETHOD_SCALE_MAX_Y 256
+
 #endif // !DC_BIND_CONFIG
