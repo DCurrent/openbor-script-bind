@@ -46,7 +46,7 @@ void dc_bind_apply_position()
 	offset_z = dc_bind_get_offset_z();
 	
 	// Now apply position according to offset settings.
-	//if (offset_x != DC_BIND_OFFSET_DISABLE)
+	//if (dc_bind_get_enable_x() != DC_BIND_OFFSET_DISABLE)
 	//{
 
 		// Invert X offset if target faces left.
@@ -60,17 +60,16 @@ void dc_bind_apply_position()
 		pos_x += offset_x;
 	//}
 
-	//if (offset_y != DC_BIND_OFFSET_DISABLE)
+	//if (dc_bind_get_enable_x() != DC_BIND_OFFSET_DISABLE)
 	//{
 		pos_y += offset_y;
 	//}
 
-	//if (offset_x != DC_BIND_OFFSET_DISABLE)
+	//if (dc_bind_get_enable_x() != DC_BIND_OFFSET_DISABLE)
 	//{
 		pos_z += offset_z;
 	//}
 
 	// Apply the position change.
-	//changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
 	changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
 }
