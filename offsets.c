@@ -4,7 +4,94 @@
 
 // Accessors and Mutators
 
-// X axis.
+// X axis enable.
+int dc_bind_get_enable_x()
+{
+	int instance;
+	int result;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_X);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_BIND_DEFAULT_ENABLE_X;
+	}
+
+	return result;
+}
+
+int dc_bind_set_enable_x(int value)
+{
+	int instance;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	setlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_X, value);
+}
+
+// Y axis enable.
+int dc_bind_get_enable_y()
+{
+	int instance;
+	int result;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_Y);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_BIND_DEFAULT_ENABLE_Y;
+	}
+
+	return result;
+}
+
+int dc_bind_set_enable_y(int value)
+{
+	int instance;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	setlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_Y, value);
+}
+
+// z axis enable.
+int dc_bind_get_enable_z()
+{
+	int instance;
+	int result;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_Z);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_BIND_DEFAULT_ENABLE_Z;
+	}
+
+	return result;
+}
+
+int dc_bind_set_enable_z(int value)
+{
+	int instance;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	setlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_Z, value);
+}
+
+// X axis offset.
 int dc_bind_get_offset_x()
 {
 	int instance;
@@ -33,7 +120,7 @@ int dc_bind_set_offset_x(int value)
 	setlocalvar(instance + DC_BIND_VAR_KEY_OFFSET_X, value);
 }
 
-// Y axis.
+// Y axis offset.
 int dc_bind_get_offset_y()
 {
 	int instance;
@@ -62,7 +149,7 @@ int dc_bind_set_offset_y(int value)
 	setlocalvar(instance + DC_BIND_VAR_KEY_OFFSET_Y, value);
 }
 
-// Z axis.
+// Z axis offset.
 int dc_bind_get_offset_z()
 {
 	int instance;
@@ -90,6 +177,8 @@ int dc_bind_set_offset_z(int value)
 
 	setlocalvar(instance + DC_BIND_VAR_KEY_OFFSET_Z, value);
 }
+
+
 
 // Operations
 
