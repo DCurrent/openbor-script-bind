@@ -7,11 +7,11 @@ int dc_bind_get_positioning_x()
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_X);
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_X);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_ENABLE_X;
+		result = DC_BIND_DEFAULT_POSITIONING_X;
 	}
 
 	return result;
@@ -24,7 +24,7 @@ int dc_bind_set_positioning_x(int value)
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_X, value);
+	setlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_X, value);
 }
 
 // Y axis positioning.
@@ -36,11 +36,11 @@ int dc_bind_get_positioning_y()
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_Y);
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_Y);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_ENABLE_Y;
+		result = DC_BIND_DEFAULT_POSITIONING_Y;
 	}
 
 	return result;
@@ -53,7 +53,7 @@ int dc_bind_set_positioning_y(int value)
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_Y, value);
+	setlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_Y, value);
 }
 
 // z axis positioning.
@@ -65,11 +65,11 @@ int dc_bind_get_positioning_z()
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_Z);
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_Z);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_ENABLE_Z;
+		result = DC_BIND_DEFAULT_POSITIONING_Z;
 	}
 
 	return result;
@@ -82,5 +82,5 @@ int dc_bind_set_positioning_z(int value)
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_ENABLE_Z, value);
+	setlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_Z, value);
 }
