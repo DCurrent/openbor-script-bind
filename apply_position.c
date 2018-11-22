@@ -26,19 +26,10 @@ void dc_bind_apply_position()
 	ent = dc_bind_get_entity();
 	target = dc_bind_get_target();
 
-	// Get position of target entity or screen.
-	if (target == DC_BIND_TARGET_SCREEN)
-	{
-		pos_x = DC_BIND_DEFAULT_SCREEN_X;
-		pos_y = DC_BIND_DEFAULT_SCREEN_Y;
-		pos_z = DC_BIND_DEFAULT_SCREEN_Z;
-	}
-	else
-	{
-		pos_x = getentityproperty(target, "x");
-		pos_y = getentityproperty(target, "y");
-		pos_z = getentityproperty(target, "z");
-	}
+	// Get target position.
+	pos_x = getentityproperty(target, "x");
+	pos_y = getentityproperty(target, "y");
+	pos_z = getentityproperty(target, "z");
 
 	// Get offsets.
 	offset_x = dc_bind_find_scaled_offset_x();
