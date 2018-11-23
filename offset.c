@@ -1,6 +1,7 @@
 #include "data/scripts/dc_bind/config.h"
 
-#import "data/scripts/dc_bind/config.c"
+#import "data/scripts/dc_bind/entity.c"
+#import "data/scripts/dc_bind/instance.c"
 
 // Accessors and Mutators
 // X axis offset.
