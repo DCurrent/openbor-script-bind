@@ -1,3 +1,7 @@
+#include "data/scripts/dc_bind/config.h"
+
+#import "data/scripts/dc_bind/instance.c"
+
 // X axis positioning.
 int dc_bind_get_positioning_x()
 {

@@ -1,7 +1,7 @@
 #include "data/scripts/dc_bind/config.h"
 
-#import "data/scripts/dc_bind/config.c"
-#import "data/scripts/dc_bind/offsets.c"
+#import "data/scripts/dc_bind/entity.c"
+#import "data/scripts/dc_bind/offset.c"
 
 // Caskey, Damon V.
 // 2018-11-19
