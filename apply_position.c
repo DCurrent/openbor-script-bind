@@ -40,12 +40,15 @@ void dc_bind_apply_position()
 	//if (dc_bind_get_POSITIONING_x() != DC_BIND_OFFSET_DISABLE)
 	//{
 
-		// Invert X offset if target faces left.
+		// Invert X offset if target faces left and auto invert is on.
 		direction = getentityproperty(target, "direction");
 
 		if (direction == openborconstant("DIRECTION_LEFT"))
 		{
-			offset_x = -offset_x;
+			if (dc_bind_get_invert_x() == DC_BIND_INVERT_X_ENABLED)
+			{
+				offset_x = -offset_x;
+			}			
 		}
 
 		pos_x += offset_x;
