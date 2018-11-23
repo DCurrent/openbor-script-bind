@@ -8,6 +8,8 @@
 // Options.
 // -- Positioning. Controls How binds/reposition offsets are applied
 // -- for a given axis.
+#define DC_BIND_INVERT_X_DISABLED		0
+#define DC_BIND_INVERT_X_ENABLED		1
 #define DC_BIND_POSITIONING_DISABLED	openborconstant("BINDING_POSITIONING_NONE")
 #define DC_BIND_POSITIONING_LEVEL		openborconstant("BINDING_POSITIONING_LEVEL")
 #define DC_BIND_POSITIONING_SCREEN		3
@@ -16,7 +18,7 @@
 // Default values.
 #define DC_BIND_DEFAULT_INSTANCE		0
 #define DC_BIND_DEFAULT_ENT				getlocalvar("self")
-#define DC_BIND_DEFAULT_INVERT_X		1
+#define DC_BIND_DEFAULT_INVERT_X		DC_BIND_INVERT_X_ENABLED
 #define DC_BIND_DEFAULT_OFFSET_X		0
 #define DC_BIND_DEFAULT_OFFSET_Y		0
 #define DC_BIND_DEFAULT_OFFSET_Z		0
