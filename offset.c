@@ -4,6 +4,35 @@
 #import "data/scripts/dc_bind/instance.c"
 
 // Accessors and Mutators
+// Invert X offset when target entity faces left.
+int dc_bind_get_invert_x()
+{
+	int instance;
+	int result;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_INVERT_X);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_BIND_DEFAULT_INVERT_X;
+	}
+
+	return result;
+}
+
+int dc_bind_set_invert_x(int value)
+{
+	int instance;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	setlocalvar(instance + DC_BIND_VAR_KEY_INVERT_X, value);
+}
+
 // X axis offset.
 int dc_bind_get_offset_x()
 {
