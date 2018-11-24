@@ -63,8 +63,9 @@ void dc_bind_adjust_position()
 	// X
 	if (dc_bind_get_positioning_x() != DC_BIND_POSITIONING_DISABLED)
 	{
-		// If the diffeence exceeds offset, add a finalized offset to entity position.
-		if (dc_bind_check_offset_vs_distance_to_target_x())
+		// If the scaled offset is less than distance to target,
+		// then get a finalized offset and add it to position.
+		if (dc_math_compare_unisgned_float(dc_bind_find_distance_to_target_x(), dc_bind_find_scaled_offset_x()))
 		{
 			pos_x += dc_bind_find_offset_with_invert_x();
 		}
@@ -119,43 +120,9 @@ void dc_bind_adjust_position()
 			pos_z += offset;
 		}
 	}
-	
 	   
 	// Apply the position change.
 	changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
-}
-
-// Caskey, Damon V.
-//
-// Return true if offset is greater than the distance
-// between acting entity and target.
-int dc_bind_check_offset_vs_distance_to_target_x()
-{
-	float diff;
-	int offset;
-
-	diff = dc_bind_find_distance_to_target_x();
-	offset = dc_bind_find_scaled_offset_x();
-
-	// Difference will always be
-	// positive value, so we need
-	// positive offset to compare.
-	if (offset < 0)
-	{
-		offset = -offset;
-	}
-	else
-	{
-		offset = offset;
-	}
-
-	// If the diffeence exceeds offset, return true.
-	if (diff > offset)
-	{
-		return 1;
-	}
-
-	return 0;
 }
 
 // Caskey, Damon V.
