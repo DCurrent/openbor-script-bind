@@ -10,8 +10,8 @@
 
 // Options.
 // -- Invert. Invert the offset when criteria are met.
-#define DC_BIND_INVERT_DISABLED			0	// No invert.
 #define DC_BIND_INVERT_DIRECTION		1	// Target faces left.
+#define DC_BIND_INVERT_DISABLED			0	// No invert.
 #define DC_BIND_INVERT_POSITION			2	// Target position is greater along axis.
 // -- Positioning. Controls How binds/reposition offsets are applied
 // -- for a given axis.
