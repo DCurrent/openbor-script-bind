@@ -105,7 +105,6 @@ float dc_bind_find_target_position_x()
 	void target;		// Target entity;
 	int positioning;	// Positioning type.
 	float result;		// Final output.
-	int offset;			// Offset.
 
 	// Entities.
 	ent = dc_bind_get_entity();
@@ -121,35 +120,15 @@ float dc_bind_find_target_position_x()
 	}
 	else if (positioning == DC_BIND_POSITIONING_LEVEL)
 	{
-		// Use offset as position.
-		offset = dc_bind_get_offset_x();
-
-		result = offset;
+		result = 0;
 	}
 	else if (positioning == DC_BIND_POSITIONING_SCREEN)
 	{
-		// Offset + Screen position.
-		result = DC_BIND_DEFAULT_SCREEN_X + offset;
+		result = DC_BIND_DEFAULT_SCREEN_X;
 	}
 	else if (positioning == DC_BIND_POSITIONING_TARGET)
 	{
-		// Get offset, adjusted to target scale.
-		offset = dc_bind_find_scaled_offset_x();
-
-		// If target is facing left and 
-		// inverting is enabled, then
-		// we invert the offset before
-		// applying it to position.	
-		if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
-		{
-			if (dc_bind_get_invert_x() == DC_BIND_INVERT_X_ENABLED)
-			{
-				offset = -offset;
-			}
-		}
-
-		// Target position + offset.
-		result = getentityproperty(target, "x") + offset;
+		result = getentityproperty(target, "x");
 	}
 
 	return result;
@@ -167,7 +146,6 @@ float dc_bind_find_target_position_y()
 	void target;		// Target entity;
 	int positioning;	// Positioning type.
 	float result;		// Final output.
-	int offset;			// Offset.
 
 	// Entities.
 	ent = dc_bind_get_entity();
@@ -183,23 +161,15 @@ float dc_bind_find_target_position_y()
 	}
 	else if (positioning == DC_BIND_POSITIONING_LEVEL)
 	{
-		// Use offset as position.
-		offset = dc_bind_get_offset_y();
-
-		result = offset;
+		result = 0;
 	}
 	else if (positioning == DC_BIND_POSITIONING_SCREEN)
 	{
-		// Offset + Screen position.
-		result = DC_BIND_DEFAULT_SCREEN_Y + offset;
+		result = DC_BIND_DEFAULT_SCREEN_Y;
 	}
 	else if (positioning == DC_BIND_POSITIONING_TARGET)
 	{
-		// Get offset, adjusted to target scale.
-		offset = dc_bind_find_scaled_offset_y();
-
-		// Target position + offset.
-		result = getentityproperty(target, "y") + offset;
+		result = getentityproperty(target, "y");
 	}
 
 	return result;
@@ -233,23 +203,16 @@ float dc_bind_find_target_position_z()
 	}
 	else if (positioning == DC_BIND_POSITIONING_LEVEL)
 	{
-		// Use offset as position.
-		offset = dc_bind_get_offset_z();
-
-		result = offset;
+		result = 0;
 	}
 	else if (positioning == DC_BIND_POSITIONING_SCREEN)
 	{
-		// Offset + Screen position.
-		result = DC_BIND_DEFAULT_SCREEN_Z + offset;
+		result = DC_BIND_DEFAULT_SCREEN_Z;
 	}
 	else if (positioning == DC_BIND_POSITIONING_TARGET)
 	{
-		// Get offset.
-		offset = dc_bind_get_offset_z();
-
 		// Target position + offset.
-		result = getentityproperty(target, "z") + offset;
+		result = getentityproperty(target, "z");
 	}
 
 	return result;
