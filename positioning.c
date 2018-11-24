@@ -217,3 +217,4 @@ float dc_bind_find_target_position_z()
 
 	return result;
 }
+
