@@ -63,40 +63,11 @@ void dc_bind_adjust_position()
 	// X
 	if (dc_bind_get_positioning_x() != DC_BIND_POSITIONING_DISABLED)
 	{
-			diff = dc_bind_find_distance_to_target_x();
-			offset = dc_bind_find_scaled_offset_x();
-
-			// Difference will always be
-			// positive va;ue, so we need
-			// positive offset to compare.
-			if (offset < 0)
-			{
-				offset_check = -offset;
-			}
-			else
-			{
-				offset_check = offset;
-			}
-				
-			// If target is facing left and 
-			// inverting is enabled, then
-			// we invert the offset before
-			// applying it to position.	
-			target = dc_bind_get_target();
-
-			if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
-			{
-				if (dc_bind_get_invert_x() == DC_BIND_INVERT_DIRECTION)
-				{
-					offset = -offset;
-				}
-			}
-
-			// If the diffeence exceeds offset, add offset to entity position.
-			if (diff > offset_check)
-			{
-				pos_x += offset;
-			}
+		// If the diffeence exceeds offset, add a finalized offset to entity position.
+		if (dc_bind_check_offset_vs_distance_to_target_x())
+		{
+			pos_x += dc_bind_find_offset_with_invert_x();
+		}
 	}
 
 	// Y
@@ -152,6 +123,39 @@ void dc_bind_adjust_position()
 	   
 	// Apply the position change.
 	changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
+}
+
+// Caskey, Damon V.
+//
+// Return true if offset is greater than the distance
+// between acting entity and target.
+int dc_bind_check_offset_vs_distance_to_target_x()
+{
+	float diff;
+	int offset;
+
+	diff = dc_bind_find_distance_to_target_x();
+	offset = dc_bind_find_scaled_offset_x();
+
+	// Difference will always be
+	// positive value, so we need
+	// positive offset to compare.
+	if (offset < 0)
+	{
+		offset = -offset;
+	}
+	else
+	{
+		offset = offset;
+	}
+
+	// If the diffeence exceeds offset, return true.
+	if (diff > offset)
+	{
+		return 1;
+	}
+
+	return 0;
 }
 
 // Caskey, Damon V.
