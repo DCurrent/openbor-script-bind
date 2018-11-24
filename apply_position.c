@@ -74,50 +74,22 @@ void dc_bind_adjust_position()
 	// Y
 	if (dc_bind_get_positioning_y() != DC_BIND_POSITIONING_DISABLED)
 	{
-		diff = dc_bind_find_distance_to_target_y();
-		offset = dc_bind_find_scaled_offset_y();
-
-		// Difference will always be
-		// positive value, so we need
-		// positive offset to compare.
-		if (offset < 0)
+		// If the scaled offset is less than distance to target,
+		// then get a finalized offset and add it to position.
+		if (dc_math_compare_unisgned_float(dc_bind_find_distance_to_target_y(), dc_bind_find_scaled_offset_y()))
 		{
-			offset_check = -offset;
-		}
-		else
-		{
-			offset_check = offset;
-		}
-
-		// If the diffeence exceeds offset, add offset to entity position.
-		if (diff > offset_check)
-		{
-			pos_y += offset;
+			pos_y += dc_bind_find_offset_with_invert_y();
 		}
 	}
 
 	// Z
 	if (dc_bind_get_positioning_y() != DC_BIND_POSITIONING_DISABLED)
 	{
-		diff = dc_bind_find_distance_to_target_z();
-		offset = dc_bind_get_offset_z();
-
-		// Difference will always be
-		// positive value, so we need
-		// positive offset to compare.
-		if (offset < 0)
+		// If the scaled offset is less than distance to target,
+		// then get a finalized offset and add it to position.
+		if (dc_math_compare_unisgned_float(dc_bind_find_distance_to_target_z(), dc_bind_get_offset_z()))
 		{
-			offset_check = -offset;
-		}
-		else
-		{
-			offset_check = offset;
-		}
-
-		// If the diffeence exceeds offset, add offset to entity position.
-		if (diff > offset_check)
-		{
-			pos_z += offset;
+			pos_z += dc_bind_find_offset_with_invert_z();
 		}
 	}
 	   
