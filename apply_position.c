@@ -86,7 +86,7 @@ void dc_bind_adjust_position()
 
 			if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
 			{
-				if (dc_bind_get_invert_x() == DC_BIND_INVERT_X_ENABLED)
+				if (dc_bind_get_invert_x() == DC_BIND_INVERT_DIRECTION)
 				{
 					offset = -offset;
 				}
@@ -239,7 +239,7 @@ float dc_bind_find_position_with_offset_x()
 
 		if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
 		{
-			if (dc_bind_get_invert_x() == DC_BIND_INVERT_X_ENABLED)
+			if (dc_bind_get_invert_x() == DC_BIND_INVERT_DIRECTION)
 			{
 				offset = -offset;
 			}

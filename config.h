@@ -9,10 +9,12 @@
 #define dc_bind_find_screen_center_y() openborvariant("ypos") + (openborvariant("vresolution") / 2)
 
 // Options.
+// -- Invert. Invert the offset when criteria are met.
+#define DC_BIND_INVERT_DISABLED			0	// No invert.
+#define DC_BIND_INVERT_DIRECTION		1	// Target faces left.
+#define DC_BIND_INVERT_POSITION			2	// Target position is greater along axis.
 // -- Positioning. Controls How binds/reposition offsets are applied
 // -- for a given axis.
-#define DC_BIND_INVERT_X_DISABLED		0
-#define DC_BIND_INVERT_X_ENABLED		1
 #define DC_BIND_POSITIONING_DISABLED	openborconstant("BINDING_POSITIONING_NONE")
 #define DC_BIND_POSITIONING_LEVEL		openborconstant("BINDING_POSITIONING_LEVEL")
 #define DC_BIND_POSITIONING_SCREEN		3
@@ -21,7 +23,9 @@
 // Default values.
 #define DC_BIND_DEFAULT_INSTANCE		0
 #define DC_BIND_DEFAULT_ENT				getlocalvar("self")
-#define DC_BIND_DEFAULT_INVERT_X		DC_BIND_INVERT_X_ENABLED
+#define DC_BIND_DEFAULT_INVERT_X		DC_BIND_INVERT_DIRECTION
+#define DC_BIND_DEFAULT_INVERT_Y		DC_BIND_INVERT_DISABLED
+#define DC_BIND_DEFAULT_INVERT_Z		DC_BIND_INVERT_DISABLED
 #define DC_BIND_DEFAULT_OFFSET_X		0
 #define DC_BIND_DEFAULT_OFFSET_Y		0
 #define DC_BIND_DEFAULT_OFFSET_Z		0
@@ -39,14 +43,16 @@
 #define DC_BIND_VAR_KEY_INSTANCE		DC_BIND_VAR_KEY_BASE_ID + 0
 #define DC_BIND_VAR_KEY_ENT				DC_BIND_VAR_KEY_BASE_ID + 1
 #define DC_BIND_VAR_KEY_INVERT_X		DC_BIND_VAR_KEY_BASE_ID + 2
-#define DC_BIND_VAR_KEY_OFFSET_X		DC_BIND_VAR_KEY_BASE_ID + 3
-#define DC_BIND_VAR_KEY_OFFSET_Y		DC_BIND_VAR_KEY_BASE_ID + 4
-#define DC_BIND_VAR_KEY_OFFSET_Z		DC_BIND_VAR_KEY_BASE_ID + 5
-#define DC_BIND_VAR_KEY_POSITIONING_X	DC_BIND_VAR_KEY_BASE_ID + 6
-#define DC_BIND_VAR_KEY_POSITIONING_Y	DC_BIND_VAR_KEY_BASE_ID + 7
-#define DC_BIND_VAR_KEY_POSITIONING_Z	DC_BIND_VAR_KEY_BASE_ID + 8
-#define DC_BIND_VAR_KEY_TARGET			DC_BIND_VAR_KEY_BASE_ID + 9
-#define DC_BIND_VAR_KEY_THE_END			10			// Should always last, with a value one higher than previous key ID.
+#define DC_BIND_VAR_KEY_INVERT_Y		DC_BIND_VAR_KEY_BASE_ID + 3
+#define DC_BIND_VAR_KEY_INVERT_Z		DC_BIND_VAR_KEY_BASE_ID + 4
+#define DC_BIND_VAR_KEY_OFFSET_X		DC_BIND_VAR_KEY_BASE_ID + 5
+#define DC_BIND_VAR_KEY_OFFSET_Y		DC_BIND_VAR_KEY_BASE_ID + 6
+#define DC_BIND_VAR_KEY_OFFSET_Z		DC_BIND_VAR_KEY_BASE_ID + 7
+#define DC_BIND_VAR_KEY_POSITIONING_X	DC_BIND_VAR_KEY_BASE_ID + 8
+#define DC_BIND_VAR_KEY_POSITIONING_Y	DC_BIND_VAR_KEY_BASE_ID + 9
+#define DC_BIND_VAR_KEY_POSITIONING_Z	DC_BIND_VAR_KEY_BASE_ID + 10
+#define DC_BIND_VAR_KEY_TARGET			DC_BIND_VAR_KEY_BASE_ID + 11
+#define DC_BIND_VAR_KEY_THE_END			12			// Should always last, with a value one higher than previous key ID.
 
 // Misc hard code values
 #define DC_BIND_DRAWMETHOD_SCALE_MAX_X	256
