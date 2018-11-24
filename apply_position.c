@@ -1,7 +1,7 @@
 #include "data/scripts/dc_bind/config.h"
 
 #import "data/scripts/dc_bind/entity.c"
-#import "data/scripts/dc_bind/offset.c"
+#import "data/scripts/dc_bind/positioning.c"
 
 // Caskey, Damon V.
 // 2018-11-19
@@ -13,57 +13,19 @@ void dc_bind_apply_position()
 	void ent;
 	void target;
 
-	int offset_x;
-	int offset_y;
-	int offset_z;
-	int direction;
-
 	float pos_x;
 	float pos_y;
 	float pos_z;
 
-	// Get entities.
+	// Get entitiy.
 	ent = dc_bind_get_entity();
-	target = dc_bind_get_target();
 
-	// Get target position.
-	pos_x = getentityproperty(target, "x");
-	pos_y = getentityproperty(target, "y");
-	pos_z = getentityproperty(target, "z");
-
-	// Get offsets.
-	offset_x = dc_bind_find_scaled_offset_x();
-	offset_y = dc_bind_find_scaled_offset_y();
-	offset_z = dc_bind_get_offset_z();
-	
-	// Now apply position according to offset settings.
-	//if (dc_bind_get_POSITIONING_x() != DC_BIND_OFFSET_DISABLE)
-	//{
-
-		// Invert X offset if target faces left and auto invert is on.
-		direction = getentityproperty(target, "direction");
-
-		if (direction == openborconstant("DIRECTION_LEFT"))
-		{
-			if (dc_bind_get_invert_x() == DC_BIND_INVERT_X_ENABLED)
-			{
-				offset_x = -offset_x;
-			}			
-		}
-
-		pos_x += offset_x;
-	//}
-
-	//if (dc_bind_get_POSITIONING_x() != DC_BIND_OFFSET_DISABLE)
-	//{
-		pos_y += offset_y;
-	//}
-
-	//if (dc_bind_get_POSITIONING_x() != DC_BIND_OFFSET_DISABLE)
-	//{
-		pos_z += offset_z;
-	//}
+	// Get position for each axis.
+	pos_x = dc_bind_find_target_position_x();
+	pos_y = dc_bind_find_target_position_y();
+	pos_z = dc_bind_find_target_position_z();
 
 	// Apply the position change.
 	changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
 }
+
