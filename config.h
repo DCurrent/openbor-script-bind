@@ -1,6 +1,9 @@
 #ifndef DC_BIND_CONFIG
 #define DC_BIND_CONFIG 1
 
+// Dependencies
+#include "data/scripts/dc_math/main.c"
+
 // Function macros
 #define dc_bind_find_screen_center_x() openborvariant("xpos") + (openborvariant("hresolution") / 2)
 #define dc_bind_find_screen_center_y() openborvariant("ypos") + (openborvariant("vresolution") / 2)
