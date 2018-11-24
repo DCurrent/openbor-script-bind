@@ -199,3 +199,55 @@ int dc_bind_find_scaled_offset_y()
 
 	return offset;
 }
+
+// Caskey, Damon V.
+//
+// Return a final offset value to use in non native
+// bind functions. Don't use this to get an offset
+// for OpenBOR's native bind, because it already
+// does invert.
+int dc_bind_find_offset_with_invert_x()
+{
+	int offset;			// Offset to output.
+	int invert;			// Invert setting.
+	void ent;			// Acting entity.
+	void target;		// Target entity.
+	float target_pos;	// Target location.
+	float ent_pos;		// Entity location.	
+
+	// Get invert and offset, we need these right away.
+	offset = dc_bind_find_scaled_offset_x();
+	invert = dc_bind_get_invert_x();
+
+	if (invert == DC_BIND_INVERT_DISABLED)
+	{
+		// Do nothig, offset is returned as is.
+	}
+	else if (invert == DC_BIND_INVERT_DIRECTION)
+	{
+		// Invert if target is and facing left.
+		target = dc_bind_get_target();
+
+		if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
+		{
+			offset = -offset;
+		}
+	}
+	else if (invert == DC_BIND_INVERT_POSITION)
+	{
+		// Invert if target is in a greater position.
+		ent = dc_bind_get_entity();
+		target = dc_bind_get_target();
+
+		ent_pos = getentityproperty(ent, "x");
+		target_pos = getentityproperty(target, "x");
+
+		if (target_pos > ent_pos)
+		{
+			offset = -offset;
+		}
+	}		
+
+	// Return final offset.
+	return offset;
+}
