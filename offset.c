@@ -4,7 +4,7 @@
 #import "data/scripts/dc_bind/instance.c"
 
 // Accessors and Mutators
-// Invert X offset when target entity faces left.
+// Invert X offset settings.
 int dc_bind_get_invert_x()
 {
 	int instance;
@@ -31,6 +31,64 @@ int dc_bind_set_invert_x(int value)
 	instance = dc_bind_get_instance();
 
 	setlocalvar(instance + DC_BIND_VAR_KEY_INVERT_X, value);
+}
+
+// Invert Y offset settings.
+int dc_bind_get_invert_y()
+{
+	int instance;
+	int result;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_INVERT_Y);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_BIND_DEFAULT_INVERT_Y;
+	}
+
+	return result;
+}
+
+int dc_bind_set_invert_y(int value)
+{
+	int instance;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	setlocalvar(instance + DC_BIND_VAR_KEY_INVERT_Y, value);
+}
+
+// Invert Z offset settings.
+int dc_bind_get_invert_z()
+{
+	int instance;
+	int result;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_INVERT_Z);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_BIND_DEFAULT_INVERT_Z;
+	}
+
+	return result;
+}
+
+int dc_bind_set_invert_z(int value)
+{
+	int instance;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	setlocalvar(instance + DC_BIND_VAR_KEY_INVERT_Z, value);
 }
 
 // X axis offset.
@@ -201,8 +259,9 @@ int dc_bind_find_scaled_offset_y()
 }
 
 // Caskey, Damon V.
+// 2018-11-24
 //
-// Return a final offset value to use in non native
+// Return a final X offset value to use in non native
 // bind functions. Don't use this to get an offset
 // for OpenBOR's native bind, because it already
 // does invert.
@@ -247,6 +306,112 @@ int dc_bind_find_offset_with_invert_x()
 			offset = -offset;
 		}
 	}		
+
+	// Return final offset.
+	return offset;
+}
+
+// Caskey, Damon V.
+// 2018-11-24
+//
+// Return a final Y offset value to use in non native
+// bind functions. Don't use this to get an offset
+// for OpenBOR's native bind, because it already
+// does invert.
+int dc_bind_find_offset_with_invert_y()
+{
+	int offset;			// Offset to output.
+	int invert;			// Invert setting.
+	void ent;			// Acting entity.
+	void target;		// Target entity.
+	float target_pos;	// Target location.
+	float ent_pos;		// Entity location.	
+
+	// Get invert and offset, we need these right away.
+	offset = dc_bind_find_scaled_offset_y();
+	invert = dc_bind_get_invert_y();
+
+	if (invert == DC_BIND_INVERT_DISABLED)
+	{
+		// Do nothig, offset is returned as is.
+	}
+	else if (invert == DC_BIND_INVERT_DIRECTION)
+	{
+		// Invert if target is and facing left.
+		target = dc_bind_get_target();
+
+		if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
+		{
+			offset = -offset;
+		}
+	}
+	else if (invert == DC_BIND_INVERT_POSITION)
+	{
+		// Invert if target is in a greater position.
+		ent = dc_bind_get_entity();
+		target = dc_bind_get_target();
+
+		ent_pos = getentityproperty(ent, "y");
+		target_pos = getentityproperty(target, "y");
+
+		if (target_pos > ent_pos)
+		{
+			offset = -offset;
+		}
+	}
+
+	// Return final offset.
+	return offset;
+}
+
+// Caskey, Damon V.
+// 2018-11-24
+//
+// Return a final Z offset value to use in non native
+// bind functions. Don't use this to get an offset
+// for OpenBOR's native bind, because it already
+// does invert.
+int dc_bind_find_offset_with_invert_z()
+{
+	int offset;			// Offset to output.
+	int invert;			// Invert setting.
+	void ent;			// Acting entity.
+	void target;		// Target entity.
+	float target_pos;	// Target location.
+	float ent_pos;		// Entity location.	
+
+	// Get invert and offset, we need these right away.
+	offset = dc_bind_get_offset_z();
+	invert = dc_bind_get_invert_z();
+
+	if (invert == DC_BIND_INVERT_DISABLED)
+	{
+		// Do nothig, offset is returned as is.
+	}
+	else if (invert == DC_BIND_INVERT_DIRECTION)
+	{
+		// Invert if target is and facing left.
+		target = dc_bind_get_target();
+
+		if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
+		{
+			offset = -offset;
+		}
+	}
+	else if (invert == DC_BIND_INVERT_POSITION)
+	{
+		// Invert if target is in a greater position.
+		ent = dc_bind_get_entity();
+		target = dc_bind_get_target();
+
+		ent_pos = getentityproperty(ent, "z");
+		target_pos = getentityproperty(target, "z");
+
+		if (target_pos > ent_pos)
+		{
+			offset = -offset;
+		}
+	}
 
 	// Return final offset.
 	return offset;
