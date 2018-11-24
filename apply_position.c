@@ -32,6 +32,7 @@ void dc_bind_apply_position()
 }
 
 // Caskey, Damon V.
+// 2018-11-23
 //
 // Find position to apply after offset and positioning
 // settings are factored.
@@ -69,6 +70,7 @@ float dc_bind_find_position_with_offset_x()
 }
 
 // Caskey, Damon V.
+// 2018-11-23
 //
 // Find position to apply after offset and positioning
 // settings are factored.
@@ -91,6 +93,7 @@ float dc_bind_find_position_with_offset_y()
 }
 
 // Caskey, Damon V.
+// 2018-11-23
 //
 // Find position to apply after offset and positioning
 // settings are factored.
