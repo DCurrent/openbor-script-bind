@@ -2,6 +2,7 @@
 
 #import "data/scripts/dc_bind/entity.c"
 #import "data/scripts/dc_bind/instance.c"
+#import "data/scripts/dc_bind/level.c"
 #import "data/scripts/dc_bind/offset.c"
 #import "data/scripts/dc_bind/positioning.c"
 
