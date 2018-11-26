@@ -8,7 +8,7 @@
 // 2018-11-19
 // 
 // Move entity to target location with offset,
-// of to screen position if target is NULL().
+// or to screen position if target is NULL().
 void dc_bind_apply_position()
 {
 	void ent;
