@@ -2,6 +2,7 @@
 
 #import "data/scripts/dc_bind/instance.c"
 #import "data/scripts/dc_bind/entity.c"
+#import "data/scripts/dc_bind/level.c"
 #import "data/scripts/dc_bind/offset.c"
 
 // X axis positioning.
@@ -120,7 +121,7 @@ float dc_bind_find_target_position_x()
 	}
 	else if (positioning == DC_BIND_POSITIONING_LEVEL)
 	{
-		result = 0;
+		result = dc_bind_get_level_x();
 	}
 	else if (positioning == DC_BIND_POSITIONING_SCREEN)
 	{
@@ -161,7 +162,7 @@ float dc_bind_find_target_position_y()
 	}
 	else if (positioning == DC_BIND_POSITIONING_LEVEL)
 	{
-		result = 0;
+		result = dc_bind_get_level_y();
 	}
 	else if (positioning == DC_BIND_POSITIONING_SCREEN)
 	{
@@ -203,7 +204,7 @@ float dc_bind_find_target_position_z()
 	}
 	else if (positioning == DC_BIND_POSITIONING_LEVEL)
 	{
-		result = 0;
+		result = dc_bind_get_level_z();
 	}
 	else if (positioning == DC_BIND_POSITIONING_SCREEN)
 	{
