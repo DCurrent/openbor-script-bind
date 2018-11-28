@@ -100,3 +100,86 @@ void dc_bind_dump_instance()
 	// Log end point.
 	log("\n End Dump.\n");
 }
+
+// Caskey, Damon V.
+// 2018-11-28
+//
+// Export instance to global vars for other event
+// to import.
+void dc_bind_export_instance()
+{
+	int instance;
+	int i;
+	char id;
+
+	void value;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	// Loop from 0 to end count of instance variables.
+	for (i = 0; i < DC_BIND_VAR_KEY_THE_END; i++)
+	{
+		// Concatenate the variable ID.
+		id = instance + DC_BIND_VAR_KEY_BASE_ID + i;
+
+		// Get local (library) value.
+		value = getlocalvar(id);
+	
+		// Export value to global var.
+		setglobalvar(id, value);
+	}
+}
+
+// Caskey, Damon V.
+// 2018-11-28
+//
+// Import an exported instance.
+void dc_bind_import_instance()
+{
+	int instance;
+	int i;
+	char id;
+
+	void value;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	// Loop from 0 to end count of instance variables.
+	for (i = 0; i < DC_BIND_VAR_KEY_THE_END; i++)
+	{
+		// Concatenate the variable ID.
+		id = instance + DC_BIND_VAR_KEY_BASE_ID + i;
+
+		// Get value
+		value = getglobalvar(id);
+
+		// Import value to local (library) var.
+		setlocalvar(id, value);
+	}
+}
+
+// Caskey, Damon V.
+// 2018-11-22
+//
+// Destroy the current instance export.
+void dc_bind_free_export()
+{
+	int instance;
+	int i;
+	char id;
+
+	// Get instance.
+	instance = dc_bind_get_instance();
+
+	// Loop from 0 to end count of library variables.
+	for (i = 0; i < DC_BIND_VAR_KEY_THE_END; i++)
+	{
+		// Concatenate the variable ID.
+		id = instance + DC_BIND_VAR_KEY_BASE_ID + i;
+
+		// Delete the global variable.
+		setglobalvar(id, NULL());
+	}
+}
