@@ -25,12 +25,21 @@ int dc_bind_get_invert_x()
 
 int dc_bind_set_invert_x(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_bind_get_instance();
+	// Get ID.
+	id = dc_bind_get_instance() + DC_BIND_VAR_KEY_INVERT_X;
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_INVERT_X, value);
+	// If value is default, make sure the variable
+	// is deleted.
+	if (value == DC_BIND_DEFAULT_INVERT_X)
+	{
+		setlocalvar(id, value);
+	}
+	else
+	{
+		setlocalvar(id, NULL());
+	}	
 }
 
 // Invert Y offset settings.
