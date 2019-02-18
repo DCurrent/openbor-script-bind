@@ -61,7 +61,7 @@ void dc_bind_adjust_position()
 	pos_z = getentityproperty(ent, "z");
 
 	// X
-	if (dc_bind_get_positioning_x() != DC_BIND_POSITIONING_DISABLED)
+	if (dc_bind_get_positioning_x() != DC_BIND_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
@@ -72,7 +72,7 @@ void dc_bind_adjust_position()
 	}
 
 	// Y
-	if (dc_bind_get_positioning_y() != DC_BIND_POSITIONING_DISABLED)
+	if (dc_bind_get_positioning_y() != DC_BIND_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
@@ -83,7 +83,7 @@ void dc_bind_adjust_position()
 	}
 
 	// Z
-	if (dc_bind_get_positioning_y() != DC_BIND_POSITIONING_DISABLED)
+	if (dc_bind_get_positioning_y() != DC_BIND_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
@@ -172,7 +172,7 @@ float dc_bind_find_position_with_offset_x()
 
 	offset = dc_bind_find_scaled_offset_x();
 
-	if (dc_bind_get_positioning_x() != DC_BIND_POSITIONING_DISABLED)
+	if (dc_bind_get_positioning_x() != DC_BIND_MODE_DISABLED)
 	{
 		// If target is facing left and 
 		// inverting is enabled, then
@@ -209,7 +209,7 @@ float dc_bind_find_position_with_offset_y()
 
 	offset = dc_bind_find_scaled_offset_y();
 
-	if (dc_bind_get_positioning_x() != DC_BIND_POSITIONING_DISABLED)
+	if (dc_bind_get_positioning_x() != DC_BIND_MODE_DISABLED)
 	{
 		position += offset;
 	}
@@ -232,7 +232,7 @@ float dc_bind_find_position_with_offset_z()
 
 	offset = dc_bind_get_offset_z();
 
-	if (dc_bind_get_positioning_x() != DC_BIND_POSITIONING_DISABLED)
+	if (dc_bind_get_positioning_x() != DC_BIND_MODE_DISABLED)
 	{
 		position += offset;
 	}

@@ -14,11 +14,11 @@ int dc_bind_get_positioning_x()
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_X);
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_X);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_POSITIONING_X;
+		result = DC_BIND_DEFAULT_POSITION_STATE_X;
 	}
 
 	return result;
@@ -31,7 +31,7 @@ int dc_bind_set_positioning_x(int value)
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_X, value);
+	setlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_X, value);
 }
 
 // Y axis positioning.
@@ -43,11 +43,11 @@ int dc_bind_get_positioning_y()
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_Y);
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_Y);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_POSITIONING_Y;
+		result = DC_BIND_DEFAULT_POSITION_STATE_Y;
 	}
 
 	return result;
@@ -60,7 +60,7 @@ int dc_bind_set_positioning_y(int value)
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_Y, value);
+	setlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_Y, value);
 }
 
 // z axis positioning.
@@ -72,11 +72,11 @@ int dc_bind_get_positioning_z()
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_Z);
+	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_Z);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_POSITIONING_Z;
+		result = DC_BIND_DEFAULT_POSITION_STATE_Z;
 	}
 
 	return result;
@@ -89,7 +89,7 @@ int dc_bind_set_positioning_z(int value)
 	// Get instance.
 	instance = dc_bind_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_POSITIONING_Z, value);
+	setlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_Z, value);
 }
 
 // Operations.
@@ -114,20 +114,20 @@ float dc_bind_find_target_position_x()
 	// Let's get the positioning setting and decide what to do.
 	positioning = dc_bind_get_positioning_x();
 
-	if (positioning == DC_BIND_POSITIONING_DISABLED)
+	if (positioning == DC_BIND_MODE_DISABLED)
 	{
 		// Use current position (IOW, no position change).
 		result = getentityproperty(ent, "x");
 	}
-	else if (positioning == DC_BIND_POSITIONING_LEVEL)
+	else if (positioning == DC_BIND_MODE_LEVEL)
 	{
 		result = dc_bind_get_level_x();
 	}
-	else if (positioning == DC_BIND_POSITIONING_SCREEN)
+	else if (positioning == DC_BIND_MODE_SCREEN)
 	{
 		result = DC_BIND_DEFAULT_SCREEN_X;
 	}
-	else if (positioning == DC_BIND_POSITIONING_TARGET)
+	else if (positioning == DC_BIND_MODE_TARGET)
 	{
 		result = getentityproperty(target, "x");
 	}
@@ -155,20 +155,20 @@ float dc_bind_find_target_position_y()
 	// Let's get the positioning setting and decide what to do.
 	positioning = dc_bind_get_positioning_y();
 
-	if (positioning == DC_BIND_POSITIONING_DISABLED)
+	if (positioning == DC_BIND_MODE_DISABLED)
 	{
 		// Use current position (IOW, no position change).
 		result = getentityproperty(ent, "y");
 	}
-	else if (positioning == DC_BIND_POSITIONING_LEVEL)
+	else if (positioning == DC_BIND_MODE_LEVEL)
 	{
 		result = dc_bind_get_level_y();
 	}
-	else if (positioning == DC_BIND_POSITIONING_SCREEN)
+	else if (positioning == DC_BIND_MODE_SCREEN)
 	{
 		result = DC_BIND_DEFAULT_SCREEN_Y;
 	}
-	else if (positioning == DC_BIND_POSITIONING_TARGET)
+	else if (positioning == DC_BIND_MODE_TARGET)
 	{
 		result = getentityproperty(target, "y");
 	}
@@ -197,20 +197,20 @@ float dc_bind_find_target_position_z()
 	// Let's get the positioning setting and decide what to do.
 	positioning = dc_bind_get_positioning_z();
 
-	if (positioning == DC_BIND_POSITIONING_DISABLED)
+	if (positioning == DC_BIND_MODE_DISABLED)
 	{
 		// Use current position (IOW, no position change).
 		result = getentityproperty(ent, "z");
 	}
-	else if (positioning == DC_BIND_POSITIONING_LEVEL)
+	else if (positioning == DC_BIND_MODE_LEVEL)
 	{
 		result = dc_bind_get_level_z();
 	}
-	else if (positioning == DC_BIND_POSITIONING_SCREEN)
+	else if (positioning == DC_BIND_MODE_SCREEN)
 	{
 		result = DC_BIND_DEFAULT_SCREEN_Z;
 	}
-	else if (positioning == DC_BIND_POSITIONING_TARGET)
+	else if (positioning == DC_BIND_MODE_TARGET)
 	{
 		// Target position + offset.
 		result = getentityproperty(target, "z");
