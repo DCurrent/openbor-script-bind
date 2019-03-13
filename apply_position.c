@@ -1,15 +1,15 @@
-#include "data/scripts/dc_bind/config.h"
+#include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_bind/entity.c"
-#import "data/scripts/dc_bind/offset.c"
-#import "data/scripts/dc_bind/positioning.c"
+#import "data/scripts/dc_elmers/entity.c"
+#import "data/scripts/dc_elmers/offset.c"
+#import "data/scripts/dc_elmers/positioning.c"
 
 // Caskey, Damon V.
 // 2018-11-19
 // 
 // Move entity to target location with offset,
 // or to screen position if target is NULL().
-void dc_bind_apply_position()
+void dc_elmers_apply_position()
 {
 	void ent;
 
@@ -18,12 +18,12 @@ void dc_bind_apply_position()
 	float pos_z;
 	
 	// Get entities.
-	ent = dc_bind_get_entity();
+	ent = dc_elmers_get_entity();
 
 	// Get position for each axis.
-	pos_x = dc_bind_find_position_with_offset_x();
-	pos_y = dc_bind_find_position_with_offset_y();
-	pos_z = dc_bind_find_position_with_offset_z();
+	pos_x = dc_elmers_find_position_with_offset_x();
+	pos_y = dc_elmers_find_position_with_offset_y();
+	pos_z = dc_elmers_find_position_with_offset_z();
 
 	// Apply the position change.
 	changeentityproperty(ent, "position", pos_x, pos_z, pos_y);
@@ -34,7 +34,7 @@ void dc_bind_apply_position()
 // 
 // Move entity to target <offset> closer to
 // or father from target.
-void dc_bind_adjust_position()
+void dc_elmers_adjust_position()
 {
 	void ent;
 	void target;
@@ -52,8 +52,8 @@ void dc_bind_adjust_position()
 	float diff;
 
 	// Get entities.
-	ent = dc_bind_get_entity();
-	target = dc_bind_get_target();
+	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
 
 	// Get entity location for each axis.
 	pos_x = getentityproperty(ent, "x");
@@ -61,35 +61,35 @@ void dc_bind_adjust_position()
 	pos_z = getentityproperty(ent, "z");
 
 	// X
-	if (dc_bind_get_positioning_x() != DC_BIND_MODE_DISABLED)
+	if (dc_elmers_get_positioning_x() != DC_ELMERS_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
-		if (dc_math_compare_unisgned_float(dc_bind_find_distance_to_target_x(), dc_bind_find_scaled_offset_x()))
+		if (dc_math_compare_unisgned_float(dc_elmers_find_distance_to_target_x(), dc_elmers_find_scaled_offset_x()))
 		{
-			pos_x += dc_bind_find_offset_with_invert_x();
+			pos_x += dc_elmers_find_offset_with_invert_x();
 		}
 	}
 
 	// Y
-	if (dc_bind_get_positioning_y() != DC_BIND_MODE_DISABLED)
+	if (dc_elmers_get_positioning_y() != DC_ELMERS_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
-		if (dc_math_compare_unisgned_float(dc_bind_find_distance_to_target_y(), dc_bind_find_scaled_offset_y()))
+		if (dc_math_compare_unisgned_float(dc_elmers_find_distance_to_target_y(), dc_elmers_find_scaled_offset_y()))
 		{
-			pos_y += dc_bind_find_offset_with_invert_y();
+			pos_y += dc_elmers_find_offset_with_invert_y();
 		}
 	}
 
 	// Z
-	if (dc_bind_get_positioning_y() != DC_BIND_MODE_DISABLED)
+	if (dc_elmers_get_positioning_y() != DC_ELMERS_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
-		if (dc_math_compare_unisgned_float(dc_bind_find_distance_to_target_z(), dc_bind_get_offset_z()))
+		if (dc_math_compare_unisgned_float(dc_elmers_find_distance_to_target_z(), dc_elmers_get_offset_z()))
 		{
-			pos_z += dc_bind_find_offset_with_invert_z();
+			pos_z += dc_elmers_find_offset_with_invert_z();
 		}
 	}
 	   
@@ -100,39 +100,19 @@ void dc_bind_adjust_position()
 // Caskey, Damon V.
 //
 // Find distance bewtween target location and entity.
-float dc_bind_find_distance_to_target_x()
+float dc_elmers_find_distance_to_target_x()
 {
 	void ent;
 	void target;
 	float target_pos;
 	float ent_pos;
 	
-	ent = dc_bind_get_entity();
-	target = dc_bind_get_target();
+	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
 
-	target_pos = dc_bind_find_target_position_x();
+	target_pos = dc_elmers_find_target_position_x();
 
-	ent_pos = getentityproperty(ent, "x");
-
-	return dc_math_difference_float(ent_pos, target_pos);
-}
-
-// Caskey, Damon V.
-//
-// Find distance bewtween target location and entity.
-float dc_bind_find_distance_to_target_y()
-{
-	void ent;
-	void target;
-	float target_pos;
-	float ent_pos;
-
-	ent = dc_bind_get_entity();
-	target = dc_bind_get_target();
-
-	target_pos = dc_bind_find_target_position_y();
-
-	ent_pos = getentityproperty(ent, "y");
+	ent_pos = get_entity_property(ent, "position_x");
 
 	return dc_math_difference_float(ent_pos, target_pos);
 }
@@ -140,19 +120,39 @@ float dc_bind_find_distance_to_target_y()
 // Caskey, Damon V.
 //
 // Find distance bewtween target location and entity.
-float dc_bind_find_distance_to_target_z()
+float dc_elmers_find_distance_to_target_y()
 {
 	void ent;
 	void target;
 	float target_pos;
 	float ent_pos;
 
-	ent = dc_bind_get_entity();
-	target = dc_bind_get_target();
+	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
 
-	target_pos = dc_bind_find_target_position_z();
+	target_pos = dc_elmers_find_target_position_y();
 
-	ent_pos = getentityproperty(ent, "z");
+	ent_pos = get_entity_property(ent, "position_y");
+
+	return dc_math_difference_float(ent_pos, target_pos);
+}
+
+// Caskey, Damon V.
+//
+// Find distance bewtween target location and entity.
+float dc_elmers_find_distance_to_target_z()
+{
+	void ent;
+	void target;
+	float target_pos;
+	float ent_pos;
+
+	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
+
+	target_pos = dc_elmers_find_target_position_z();
+
+	ent_pos = get_entity_property(ent, "position_z");
 
 	return dc_math_difference_float(ent_pos, target_pos);
 }
@@ -162,27 +162,30 @@ float dc_bind_find_distance_to_target_z()
 //
 // Find position to apply after offset and positioning
 // settings are factored.
-float dc_bind_find_position_with_offset_x()
+float dc_elmers_find_position_with_offset_x()
 {
+	int direction;
 	int offset;
 	float position;
 	void target;
 
-	position = dc_bind_find_target_position_x();
+	position = dc_elmers_find_target_position_x();
 
-	offset = dc_bind_find_scaled_offset_x();
+	offset = dc_elmers_find_scaled_offset_x();
 
-	if (dc_bind_get_positioning_x() != DC_BIND_MODE_DISABLED)
+	if (dc_elmers_get_positioning_x() != DC_ELMERS_MODE_DISABLED)
 	{
 		// If target is facing left and 
 		// inverting is enabled, then
 		// we invert the offset before
 		// applying it to position.	
-		target = dc_bind_get_target();
+		target = dc_elmers_get_target();
 
-		if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
+		direction = get_entity_property(target, "position_direction");
+
+		if (direction == openborconstant("DIRECTION_LEFT"))
 		{
-			if (dc_bind_get_invert_x() == DC_BIND_INVERT_DIRECTION)
+			if (dc_elmers_get_invert_x() == DC_ELMERS_INVERT_DIRECTION)
 			{
 				offset = -offset;
 			}
@@ -200,16 +203,16 @@ float dc_bind_find_position_with_offset_x()
 //
 // Find position to apply after offset and positioning
 // settings are factored.
-float dc_bind_find_position_with_offset_y()
+float dc_elmers_find_position_with_offset_y()
 {
 	int offset;
 	float position;
 
-	position = dc_bind_find_target_position_y();
+	position = dc_elmers_find_target_position_y();
 
-	offset = dc_bind_find_scaled_offset_y();
+	offset = dc_elmers_find_scaled_offset_y();
 
-	if (dc_bind_get_positioning_x() != DC_BIND_MODE_DISABLED)
+	if (dc_elmers_get_positioning_x() != DC_ELMERS_MODE_DISABLED)
 	{
 		position += offset;
 	}
@@ -223,16 +226,16 @@ float dc_bind_find_position_with_offset_y()
 //
 // Find position to apply after offset and positioning
 // settings are factored.
-float dc_bind_find_position_with_offset_z()
+float dc_elmers_find_position_with_offset_z()
 {
 	int offset;
 	float position;
 
-	position = dc_bind_find_target_position_z();
+	position = dc_elmers_find_target_position_z();
 
-	offset = dc_bind_get_offset_z();
+	offset = dc_elmers_get_offset_z();
 
-	if (dc_bind_get_positioning_x() != DC_BIND_MODE_DISABLED)
+	if (dc_elmers_get_positioning_x() != DC_ELMERS_MODE_DISABLED)
 	{
 		position += offset;
 	}

@@ -1,21 +1,21 @@
-#include "data/scripts/dc_bind/config.h"
+#include "data/scripts/dc_elmers/config.h"
 
 // Which instance is in use?
-int dc_bind_get_instance()
+int dc_elmers_get_instance()
 {
-	void result = getlocalvar(DC_BIND_VAR_KEY_INSTANCE);
+	void result = getlocalvar(DC_ELMERS_VAR_KEY_INSTANCE);
 
 	if (!result)
 	{
-		result = DC_BIND_DEFAULT_INSTANCE;
+		result = DC_ELMERS_DEFAULT_INSTANCE;
 	}
 
 	return result;
 }
 
-void dc_bind_set_instance(int value)
+void dc_elmers_set_instance(int value)
 {
-	setlocalvar(DC_BIND_VAR_KEY_INSTANCE, value);
+	setlocalvar(DC_ELMERS_VAR_KEY_INSTANCE, value);
 }
 
 // Caskey, Damon V.
@@ -23,22 +23,22 @@ void dc_bind_set_instance(int value)
 //
 // Clears the current instance, effectively resetting
 // all values to their defaults.
-void dc_bind_reset_instance()
+void dc_elmers_reset_instance()
 {
 	int instance;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
 	// Destroy all instance variables.
-	dc_bind_free_instance();
+	dc_elmers_free_instance();
 
 	// If the instance ID isn't default, then restore 
 	// it to memory. Either way we now have a clean
 	// copy of the current instance.
-	if (instance != DC_BIND_DEFAULT_INSTANCE)
+	if (instance != DC_ELMERS_DEFAULT_INSTANCE)
 	{
-		dc_bind_set_instance(instance);
+		dc_elmers_set_instance(instance);
 	}
 }
 
@@ -47,20 +47,20 @@ void dc_bind_reset_instance()
 //
 // Destroy the current instance by deleting all
 // library variables.
-void dc_bind_free_instance()
+void dc_elmers_free_instance()
 {
 	int instance;
 	int i;
 	char id;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
 	// Loop from 0 to end count of library variables.
-	for (i = 0; i < DC_BIND_VAR_KEY_THE_END; i++)
+	for (i = 0; i < DC_ELMERS_VAR_KEY_THE_END; i++)
 	{
 		// Concatenate the variable ID.
-		id = instance + DC_BIND_VAR_KEY_BASE_ID + i;
+		id = instance + DC_ELMERS_VAR_KEY_BASE_ID + i;
 
 		// Delete variable.
 		setlocalvar(id, NULL());
@@ -71,24 +71,24 @@ void dc_bind_free_instance()
 // 2018-11-22
 //
 // Send all library variables to log for debugging.
-void dc_bind_dump_instance()
+void dc_elmers_dump_instance()
 {
 	int instance;
 	int i;
 	char id;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
 	// Log base name and instance.
-	log("\n\n " + DC_BIND_VAR_KEY_BASE_ID + " dump:");
+	log("\n\n " + DC_ELMERS_VAR_KEY_BASE_ID + " dump:");
 	log("\n\t " + "Instance: " + instance);
 
 	// Loop from 0 to end count of instance variables.
-	for (i = 0; i < DC_BIND_VAR_KEY_THE_END; i++)
+	for (i = 0; i < DC_ELMERS_VAR_KEY_THE_END; i++)
 	{
 		// Concatenate the variable ID.
-		id = instance + DC_BIND_VAR_KEY_BASE_ID + i;
+		id = instance + DC_ELMERS_VAR_KEY_BASE_ID + i;
 
 		// Log ID.
 		log("\n\t " + id + ": ");
@@ -106,7 +106,7 @@ void dc_bind_dump_instance()
 //
 // Export instance to global vars for other event
 // to import.
-void dc_bind_export_instance()
+void dc_elmers_export_instance()
 {
 	int instance;
 	int i;
@@ -115,13 +115,13 @@ void dc_bind_export_instance()
 	void value;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
 	// Loop from 0 to end count of instance variables.
-	for (i = 0; i < DC_BIND_VAR_KEY_THE_END; i++)
+	for (i = 0; i < DC_ELMERS_VAR_KEY_THE_END; i++)
 	{
 		// Concatenate the variable ID.
-		id = instance + DC_BIND_VAR_KEY_BASE_ID + i;
+		id = instance + DC_ELMERS_VAR_KEY_BASE_ID + i;
 
 		// Get local (library) value.
 		value = getlocalvar(id);
@@ -135,7 +135,7 @@ void dc_bind_export_instance()
 // 2018-11-28
 //
 // Import an exported instance.
-void dc_bind_import_instance()
+void dc_elmers_import_instance()
 {
 	int instance;
 	int i;
@@ -144,13 +144,13 @@ void dc_bind_import_instance()
 	void value;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
 	// Loop from 0 to end count of instance variables.
-	for (i = 0; i < DC_BIND_VAR_KEY_THE_END; i++)
+	for (i = 0; i < DC_ELMERS_VAR_KEY_THE_END; i++)
 	{
 		// Concatenate the variable ID.
-		id = instance + DC_BIND_VAR_KEY_BASE_ID + i;
+		id = instance + DC_ELMERS_VAR_KEY_BASE_ID + i;
 
 		// Get value
 		value = getglobalvar(id);
@@ -164,20 +164,20 @@ void dc_bind_import_instance()
 // 2018-11-22
 //
 // Destroy the current instance export.
-void dc_bind_free_export()
+void dc_elmers_free_export()
 {
 	int instance;
 	int i;
 	char id;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
 	// Loop from 0 to end count of library variables.
-	for (i = 0; i < DC_BIND_VAR_KEY_THE_END; i++)
+	for (i = 0; i < DC_ELMERS_VAR_KEY_THE_END; i++)
 	{
 		// Concatenate the variable ID.
-		id = instance + DC_BIND_VAR_KEY_BASE_ID + i;
+		id = instance + DC_ELMERS_VAR_KEY_BASE_ID + i;
 
 		// Delete the global variable.
 		setglobalvar(id, NULL());

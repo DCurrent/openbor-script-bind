@@ -1,95 +1,95 @@
-#include "data/scripts/dc_bind/config.h"
+#include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_bind/instance.c"
-#import "data/scripts/dc_bind/entity.c"
-#import "data/scripts/dc_bind/level.c"
-#import "data/scripts/dc_bind/offset.c"
+#import "data/scripts/dc_elmers/instance.c"
+#import "data/scripts/dc_elmers/entity.c"
+#import "data/scripts/dc_elmers/level.c"
+#import "data/scripts/dc_elmers/offset.c"
 
 // X axis positioning.
-int dc_bind_get_positioning_x()
+int dc_elmers_get_positioning_x()
 {
 	int instance;
 	int result;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_X);
+	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_POSITION_STATE_X);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_POSITION_STATE_X;
+		result = DC_ELMERS_DEFAULT_POSITION_STATE_X;
 	}
 
 	return result;
 }
 
-int dc_bind_set_positioning_x(int value)
+int dc_elmers_set_positioning_x(int value)
 {
 	int instance;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_X, value);
+	setlocalvar(instance + DC_ELMERS_VAR_KEY_POSITION_STATE_X, value);
 }
 
 // Y axis positioning.
-int dc_bind_get_positioning_y()
+int dc_elmers_get_positioning_y()
 {
 	int instance;
 	int result;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_Y);
+	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_POSITION_STATE_Y);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_POSITION_STATE_Y;
+		result = DC_ELMERS_DEFAULT_POSITION_STATE_Y;
 	}
 
 	return result;
 }
 
-int dc_bind_set_positioning_y(int value)
+int dc_elmers_set_positioning_y(int value)
 {
 	int instance;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_Y, value);
+	setlocalvar(instance + DC_ELMERS_VAR_KEY_POSITION_STATE_Y, value);
 }
 
 // z axis positioning.
-int dc_bind_get_positioning_z()
+int dc_elmers_get_positioning_z()
 {
 	int instance;
 	int result;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
-	result = getlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_Z);
+	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_POSITION_STATE_Z);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_BIND_DEFAULT_POSITION_STATE_Z;
+		result = DC_ELMERS_DEFAULT_POSITION_STATE_Z;
 	}
 
 	return result;
 }
 
-int dc_bind_set_positioning_z(int value)
+int dc_elmers_set_positioning_z(int value)
 {
 	int instance;
 
 	// Get instance.
-	instance = dc_bind_get_instance();
+	instance = dc_elmers_get_instance();
 
-	setlocalvar(instance + DC_BIND_VAR_KEY_POSITION_STATE_Z, value);
+	setlocalvar(instance + DC_ELMERS_VAR_KEY_POSITION_STATE_Z, value);
 }
 
 // Operations.
@@ -100,7 +100,7 @@ int dc_bind_set_positioning_z(int value)
 // Return a final position depending on positioning settings
 // and offsets. Don't use for native engine bind functions 
 // since they already do this.
-float dc_bind_find_target_position_x()
+float dc_elmers_find_target_position_x()
 {
 	void ent;			// Entity to be repositioned.
 	void target;		// Target entity;
@@ -108,26 +108,26 @@ float dc_bind_find_target_position_x()
 	float result;		// Final output.
 
 	// Entities.
-	ent = dc_bind_get_entity();
-	target = dc_bind_get_target();
+	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
 
 	// Let's get the positioning setting and decide what to do.
-	positioning = dc_bind_get_positioning_x();
+	positioning = dc_elmers_get_positioning_x();
 
-	if (positioning == DC_BIND_MODE_DISABLED)
+	if (positioning == DC_ELMERS_MODE_DISABLED)
 	{
 		// Use current position (IOW, no position change).
 		result = getentityproperty(ent, "x");
 	}
-	else if (positioning == DC_BIND_MODE_LEVEL)
+	else if (positioning == DC_ELMERS_MODE_LEVEL)
 	{
-		result = dc_bind_get_level_x();
+		result = dc_elmers_get_level_x();
 	}
-	else if (positioning == DC_BIND_MODE_SCREEN)
+	else if (positioning == DC_ELMERS_MODE_SCREEN)
 	{
-		result = DC_BIND_DEFAULT_SCREEN_X;
+		result = DC_ELMERS_DEFAULT_SCREEN_X;
 	}
-	else if (positioning == DC_BIND_MODE_TARGET)
+	else if (positioning == DC_ELMERS_MODE_TARGET)
 	{
 		result = getentityproperty(target, "x");
 	}
@@ -141,7 +141,7 @@ float dc_bind_find_target_position_x()
 // Return a final position depending on positioning settings
 // and offsets. Don't use for native engine bind functions 
 // since they already do this.
-float dc_bind_find_target_position_y()
+float dc_elmers_find_target_position_y()
 {
 	void ent;			// Entity to be repositioned.
 	void target;		// Target entity;
@@ -149,26 +149,26 @@ float dc_bind_find_target_position_y()
 	float result;		// Final output.
 
 	// Entities.
-	ent = dc_bind_get_entity();
-	target = dc_bind_get_target();
+	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
 
 	// Let's get the positioning setting and decide what to do.
-	positioning = dc_bind_get_positioning_y();
+	positioning = dc_elmers_get_positioning_y();
 
-	if (positioning == DC_BIND_MODE_DISABLED)
+	if (positioning == DC_ELMERS_MODE_DISABLED)
 	{
 		// Use current position (IOW, no position change).
 		result = getentityproperty(ent, "y");
 	}
-	else if (positioning == DC_BIND_MODE_LEVEL)
+	else if (positioning == DC_ELMERS_MODE_LEVEL)
 	{
-		result = dc_bind_get_level_y();
+		result = dc_elmers_get_level_y();
 	}
-	else if (positioning == DC_BIND_MODE_SCREEN)
+	else if (positioning == DC_ELMERS_MODE_SCREEN)
 	{
-		result = DC_BIND_DEFAULT_SCREEN_Y;
+		result = DC_ELMERS_DEFAULT_SCREEN_Y;
 	}
-	else if (positioning == DC_BIND_MODE_TARGET)
+	else if (positioning == DC_ELMERS_MODE_TARGET)
 	{
 		result = getentityproperty(target, "y");
 	}
@@ -182,7 +182,7 @@ float dc_bind_find_target_position_y()
 // Return a final position depending on positioning settings
 // and offsets. Don't use for native engine bind functions 
 // since they already do this.
-float dc_bind_find_target_position_z()
+float dc_elmers_find_target_position_z()
 {
 	void ent;			// Entity to be repositioned.
 	void target;		// Target entity;
@@ -191,26 +191,26 @@ float dc_bind_find_target_position_z()
 	int offset;			// Offset.
 
 	// Entities.
-	ent = dc_bind_get_entity();
-	target = dc_bind_get_target();
+	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
 
 	// Let's get the positioning setting and decide what to do.
-	positioning = dc_bind_get_positioning_z();
+	positioning = dc_elmers_get_positioning_z();
 
-	if (positioning == DC_BIND_MODE_DISABLED)
+	if (positioning == DC_ELMERS_MODE_DISABLED)
 	{
 		// Use current position (IOW, no position change).
 		result = getentityproperty(ent, "z");
 	}
-	else if (positioning == DC_BIND_MODE_LEVEL)
+	else if (positioning == DC_ELMERS_MODE_LEVEL)
 	{
-		result = dc_bind_get_level_z();
+		result = dc_elmers_get_level_z();
 	}
-	else if (positioning == DC_BIND_MODE_SCREEN)
+	else if (positioning == DC_ELMERS_MODE_SCREEN)
 	{
-		result = DC_BIND_DEFAULT_SCREEN_Z;
+		result = DC_ELMERS_DEFAULT_SCREEN_Z;
 	}
-	else if (positioning == DC_BIND_MODE_TARGET)
+	else if (positioning == DC_ELMERS_MODE_TARGET)
 	{
 		// Target position + offset.
 		result = getentityproperty(target, "z");
