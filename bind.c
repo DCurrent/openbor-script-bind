@@ -3,7 +3,8 @@
 #import "data/scripts/dc_elmers/entity.c"
 #import "data/scripts/dc_elmers/offset.c"
 
-void dc_elmers_get_bind_property(char property)
+
+void dc_elmers_set_bind_animation_match(int value)
 {
 	void ent;
 	void bind;
@@ -13,10 +14,12 @@ void dc_elmers_get_bind_property(char property)
 	// Get bind pointer.
 	bind = get_entity_property(ent, "bind");
 
-	set_bind_property(bind, property);
+	set_bind_property(bind, "animation_match", value);
+
+	return bind;
 }
 
-void dc_elmers_set_bind_property(char property, void value)
+void dc_elmers_set_bind_sort_id(int value)
 {
 	void ent;
 	void bind;
@@ -26,7 +29,52 @@ void dc_elmers_set_bind_property(char property, void value)
 	// Get bind pointer.
 	bind = get_entity_property(ent, "bind");
 
-	return get_bind_property(bind, property, value);
+	set_bind_property(bind, "sort_id", value);
+
+	return bind;
+}
+
+void dc_elmers_set_bind_target(void value)
+{
+	void ent;
+	void bind;
+
+	ent = dc_elmers_get_entity();
+
+	// Get bind pointer.
+	bind = get_entity_property(ent, "bind");
+
+	set_bind_property(bind, "target", value);
+
+	return bind;
+}
+
+int dc_elmers_get_bind_property(char prop_name)
+{
+	void ent;
+	void bind;
+
+	ent = dc_elmers_get_entity();
+
+	// Get bind pointer.
+	bind = get_entity_property(ent, "bind");
+
+	return get_bind_property(bind, prop_name);
+}
+
+void dc_elmers_set_bind_property(char prop_name, int the_value)
+{
+	void ent;
+	void bind;
+
+	ent = dc_elmers_get_entity();
+
+	// Get bind pointer.
+	bind = get_entity_property(ent, "bind");
+
+	set_bind_property(bind, prop_name, the_value);
+
+	return bind;
 }
 
 // Caskey, Damon V.

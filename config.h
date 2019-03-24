@@ -42,7 +42,7 @@
 
 // Variable keys. Used to identify cross function
 // variables used throughout library.
-#define DC_ELMERS_VAR_KEY_BASE_ID			"dcbind"	// Base name of every var ID. Must be unique vs. all other libraries.
+#define DC_ELMERS_VAR_KEY_BASE_ID			"dcelme"	// Base name of every var ID. Must be unique vs. all other libraries.
 #define DC_ELMERS_VAR_KEY_INSTANCE		DC_ELMERS_VAR_KEY_BASE_ID + 0
 #define DC_ELMERS_VAR_KEY_ENT				DC_ELMERS_VAR_KEY_BASE_ID + 1
 #define DC_ELMERS_VAR_KEY_INVERT_X		DC_ELMERS_VAR_KEY_BASE_ID + 2

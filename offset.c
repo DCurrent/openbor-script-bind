@@ -246,6 +246,7 @@ int dc_elmers_find_scaled_offset_y()
 	// Is there a valid target entity?
 	target = dc_elmers_get_target();
 
+	// Is there a valid target entity?
 	if (typeof(target) == openborconstant("VT_PTR"))
 	{
 		// Get target scale. If it's a valid number,
