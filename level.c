@@ -1,7 +1,5 @@
 #include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_elmers/instance.c"
-
 // Accessors and Mutators.
 
 // X axis level position.

@@ -1,7 +1,6 @@
 #include "data/scripts/dc_elmers/config.h"
 
 #import "data/scripts/dc_elmers/entity.c"
-#import "data/scripts/dc_elmers/instance.c"
 
 // Accessors and Mutators
 // Invert X offset settings.

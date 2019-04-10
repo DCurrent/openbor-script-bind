@@ -1,7 +1,5 @@
 #include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_elmers/instance.c"
-
 // Base entity functions will act on.
 // Get
 void dc_elmers_get_entity()

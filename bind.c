@@ -2,6 +2,7 @@
 
 #import "data/scripts/dc_elmers/entity.c"
 #import "data/scripts/dc_elmers/offset.c"
+#import "data/scripts/dc_elmers/palette.c"
 
 
 void dc_elmers_set_bind_animation_match(int value)
@@ -117,6 +118,8 @@ void dc_elmers_quick_bind()
 	set_bind_property(bind, "direction", openborconstant("DIRECTION_ADJUST_SAME"));
 	
 	dc_elmers_quick_offset_to_bind();	
+
+	dc_elmers_apply_palette_match();
 
 	return bind;
 }
