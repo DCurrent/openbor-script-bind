@@ -73,47 +73,19 @@ void dc_elmers_apply_palette_match()
 
 		case DC_ELMERS_PALETTE_MATCH_TABLE:
 
-			void drawmethod = get_entity_property(target, "drawmethod");
+			// Set our color table pointer to the target's.
 
-			set_drawmethod_property(drawmethod, "enable", 1);
+			void drawmethod_target;
+			void drawmethod_ent;
+			void table;
+			
+			drawmethod_ent		= get_entity_property(entity, "drawmethod");
+			drawmethod_target	= get_entity_property(target, "drawmethod");
 
-			//set_drawmethod_property(drawmethod, "alpha", openborconstant("BLEND_MODE_AVERAGE"));
-			//set_drawmethod_property(drawmethod, "background_transparency", 1);
-			//set_drawmethod_property(drawmethod, "channel_red", 255);
-			//set_drawmethod_property(drawmethod, "channel_blue", 0);
-			//set_drawmethod_property(drawmethod, "channel_green", 0);
+			table = get_drawmethod_property(drawmethod_target, "colorset_table");
 
-			float pos_x = get_entity_property(target, "position_x");
-			float pos_y = get_entity_property(target, "position_y");
-			float pos_z = get_entity_property(target, "position_z");
-			int scroll_x = openborvariant("xpos");
-			int scroll_y = openborvariant("ypos");
-
-			set_drawmethod_property(drawmethod, "clip_position_x", -76);
-			set_drawmethod_property(drawmethod, "clip_position_y", -155);
-			set_drawmethod_property(drawmethod, "clip_size_x", 85);
-			set_drawmethod_property(drawmethod, "clip_size_y", 90);
-			//set_drawmethod_property(drawmethod, "fill_color", rgbcolor(255, 0, 255));
-			//set_drawmethod_property(drawmethod, "fill_color", rgbcolor(0, 255, 255));
-			//set_drawmethod_property(drawmethod, "repeat_x", 2);
-			//set_drawmethod_property(drawmethod, "rotate", 315);
-			//set_drawmethod_property(drawmethod, "rotate_flip", 1);
-			//set_drawmethod_property(drawmethod, "shift_x", 180);			
-			//set_drawmethod_property(drawmethod, "scale_x", 256);
-			//set_drawmethod_property(drawmethod, "scale_y", 512);
-			//set_drawmethod_property(drawmethod, "tint_color", rgbcolor(0, 255, 255));
-			//set_drawmethod_property(drawmethod, "tint_mode", openborconstant("BLEND_MODE_ALPHA_NEGATIVE"));
-
-			//changedrawmethod(target, "tintmode", 1);
-			//changedrawmethod(target, "tintcolor", rgbcolor(0, 255, 255));
-						
-
-			log("\n table:" + drawmethod);
-			log("\n  get_entity_property:" + get_entity_property(entity, "drawmethod"));
-
-			set_entity_property(entity, "drawmethod", drawmethod);
-
-			log("\n  get_drawmethod_property:" + get_drawmethod_property(drawmethod, "scale_x"));
+			set_drawmethod_property(drawmethod_ent, "colorset_table", table);
+			set_drawmethod_property(drawmethod_ent, "enable", 1);
 
 			break;
 	}
