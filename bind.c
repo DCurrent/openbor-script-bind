@@ -123,3 +123,44 @@ void dc_elmers_quick_bind()
 
 	return bind;
 }
+
+// Caskey, Damon V.
+// 2019-04-25
+//
+// Find the first entity bound to ent and 
+// return its pointer. Only call this when 
+// you know there is a single entity bound to
+// the entity you are checking. If there are 
+// any others this function will not find them.
+void dc_elmers_find_first_bound(void ent)
+{
+	int ent_count;
+	int i;
+	void ent_cursor;
+	void bind;
+
+	// Get entity count.
+	ent_count = openborvariant("count_entities");
+
+	// Loop over each entity index.
+	for (i = 0; i < ent_count; i++)
+	{
+		// Get entity pointer.
+		ent_cursor = getentity(i);
+
+		// Now get the cursor entity's bind
+		// property, and check the target against
+		// our ent pointer. If they match, we've
+		// found an entity bound to ent. Return it.
+		bind = get_entity_property(ent_cursor, "bind");
+
+		if (ent == get_bind_property(bind, "target"))
+		{
+			return ent_cursor;
+		}		
+	}
+
+	// Didn't find any entity bound to 
+	// our entity, so return a NULL pointer.
+	return NULL();
+}

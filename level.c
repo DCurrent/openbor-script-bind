@@ -1,17 +1,19 @@
 #include "data/scripts/dc_elmers/config.h"
 
+#import "data/scripts/dc_elmers/instance.c"
+
 // Accessors and Mutators.
 
 // X axis level position.
 int dc_elmers_get_level_x()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_LEVEL_X;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_LEVEL_X);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -23,24 +25,29 @@ int dc_elmers_get_level_x()
 
 int dc_elmers_set_level_x(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_LEVEL_X;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_LEVEL_X, value);
+	if (value == DC_ELMERS_DEFAULT_LEVEL_X)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }
 
 // Y axis level position.
 int dc_elmers_get_level_y()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_LEVEL_Y;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_LEVEL_Y);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -52,24 +59,29 @@ int dc_elmers_get_level_y()
 
 int dc_elmers_set_level_y(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_LEVEL_Y;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_LEVEL_Y, value);
+	if (value == DC_ELMERS_DEFAULT_LEVEL_Y)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }
 
 // Z axis level position.
 int dc_elmers_get_level_z()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_LEVEL_Z;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_LEVEL_Z);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -81,10 +93,15 @@ int dc_elmers_get_level_z()
 
 int dc_elmers_set_level_z(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_LEVEL_Z;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_LEVEL_Z, value);
+	if (value == DC_ELMERS_DEFAULT_LEVEL_Z)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }

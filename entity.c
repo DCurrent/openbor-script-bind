@@ -1,16 +1,19 @@
 #include "data/scripts/dc_elmers/config.h"
 
+#import "data/scripts/dc_elmers/instance.c"
+
+
 // Base entity functions will act on.
 // Get
 void dc_elmers_get_entity()
 {
-	int instance;
+	char id;
 	void result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_ENT;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_ENT);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_PTR"))
 	{
@@ -23,25 +26,30 @@ void dc_elmers_get_entity()
 // Set
 void dc_elmers_set_entity(void value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_ENT;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_ENT, value);
+	if (value == DC_ELMERS_DEFAULT_ENT)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }
 
 // Target entity (if any).
 // Get
 void dc_elmers_get_target()
 {
-	int instance;
+	char id;
 	void result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_TARGET;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_TARGET);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_PTR"))
 	{
@@ -54,10 +62,15 @@ void dc_elmers_get_target()
 // Set
 void dc_elmers_set_target(void value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_TARGET;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_TARGET, value);
+	if (value == DC_ELMERS_DEFAULT_TARGET)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }

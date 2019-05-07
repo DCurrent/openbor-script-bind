@@ -1,18 +1,19 @@
 #include "data/scripts/dc_elmers/config.h"
 
 #import "data/scripts/dc_elmers/entity.c"
+#import "data/scripts/dc_elmers/instance.c"
 
 // Accessors and Mutators
 // Invert X offset settings.
 int dc_elmers_get_invert_x()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_INVERT_X;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_INVERT_X);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -27,30 +28,28 @@ int dc_elmers_set_invert_x(int value)
 	char id;
 
 	// Get ID.
-	id = dc_elmers_get_instance() + DC_ELMERS_VAR_KEY_INVERT_X;
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_INVERT_X;
 
 	// If value is default, make sure the variable
 	// is deleted.
 	if (value == DC_ELMERS_DEFAULT_INVERT_X)
 	{
-		setlocalvar(id, value);
+		value = NULL();
 	}
-	else
-	{
-		setlocalvar(id, NULL());
-	}	
+	
+	setlocalvar(id, NULL());		
 }
 
 // Invert Y offset settings.
 int dc_elmers_get_invert_y()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_INVERT_Y;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_INVERT_Y);
+	result = getlocalvar(id + DC_ELMERS_MEMBER_INVERT_Y);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -62,24 +61,29 @@ int dc_elmers_get_invert_y()
 
 int dc_elmers_set_invert_y(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_INVERT_Y;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_INVERT_Y, value);
+	if (value == DC_ELMERS_DEFAULT_INVERT_Y)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }
 
 // Invert Z offset settings.
 int dc_elmers_get_invert_z()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_INVERT_Z;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_INVERT_Z);
+	result = getlocalvar(id + DC_ELMERS_MEMBER_INVERT_Z);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -91,24 +95,29 @@ int dc_elmers_get_invert_z()
 
 int dc_elmers_set_invert_z(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_INVERT_Z;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_INVERT_Z, value);
+	if (value == DC_ELMERS_DEFAULT_INVERT_Z)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }
 
 // X axis offset.
 int dc_elmers_get_offset_x()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_OFFSET_X;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_OFFSET_X);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -120,24 +129,29 @@ int dc_elmers_get_offset_x()
 
 int dc_elmers_set_offset_x(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_OFFSET_X;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_OFFSET_X, value);
+	if (value == DC_ELMERS_DEFAULT_OFFSET_X)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }
 
 // Y axis offset.
 int dc_elmers_get_offset_y()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_OFFSET_Y;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_OFFSET_Y);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -149,24 +163,29 @@ int dc_elmers_get_offset_y()
 
 int dc_elmers_set_offset_y(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_OFFSET_Y;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_OFFSET_Y, value);
+	if (value == DC_ELMERS_DEFAULT_OFFSET_Y)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }
 
 // Z axis offset.
 int dc_elmers_get_offset_z()
 {
-	int instance;
+	char id;
 	int result;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_OFFSET_Z;
 
-	result = getlocalvar(instance + DC_ELMERS_VAR_KEY_OFFSET_Z);
+	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
@@ -178,12 +197,17 @@ int dc_elmers_get_offset_z()
 
 int dc_elmers_set_offset_z(int value)
 {
-	int instance;
+	char id;
 
-	// Get instance.
-	instance = dc_elmers_get_instance();
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_OFFSET_Z;
 
-	setlocalvar(instance + DC_ELMERS_VAR_KEY_OFFSET_Z, value);
+	if (value == DC_ELMERS_DEFAULT_OFFSET_Z)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
 }
 
 
@@ -289,11 +313,11 @@ int dc_elmers_find_offset_with_invert_x()
 
 	if (invert == DC_ELMERS_INVERT_DISABLED)
 	{
-		// Do nothig, offset is returned as is.
+		// Do nothing, offset is returned as is.
 	}
 	else if (invert == DC_ELMERS_INVERT_DIRECTION)
 	{
-		// Invert if target is and facing left.
+		// Invert if target is facing left.
 		target = dc_elmers_get_target();
 
 		if (getentityproperty(target, "direction") == openborconstant("DIRECTION_LEFT"))
@@ -342,7 +366,7 @@ int dc_elmers_find_offset_with_invert_y()
 
 	if (invert == DC_ELMERS_INVERT_DISABLED)
 	{
-		// Do nothig, offset is returned as is.
+		// Do nothing, offset is returned as is.
 	}
 	else if (invert == DC_ELMERS_INVERT_DIRECTION)
 	{
@@ -395,7 +419,7 @@ int dc_elmers_find_offset_with_invert_z()
 
 	if (invert == DC_ELMERS_INVERT_DISABLED)
 	{
-		// Do nothig, offset is returned as is.
+		// Do nothing, offset is returned as is.
 	}
 	else if (invert == DC_ELMERS_INVERT_DIRECTION)
 	{
