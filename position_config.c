@@ -112,32 +112,32 @@ int dc_elmers_set_position_adjust_quantity_z(int value)
 // base target position from (screen, a target entity, etc.).
 
 // X axis.
-int dc_elmers_get_positioning_x()
+int dc_elmers_get_anchor_x()
 {
 	char id;
 	int result;
 
 	// Get id.
-	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_POSITION_STATE_X;
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_ANCHOR_X;
 
 	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_ELMERS_DEFAULT_POSITION_STATE_X;
+		result = DC_ELMERS_DEFAULT_ANCHOR_X;
 	}
 
 	return result;
 }
 
-int dc_elmers_set_positioning_x(int value)
+int dc_elmers_set_anchor_x(int value)
 {
 	char id;
 
 	// Get id.
-	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_POSITION_STATE_X;
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_ANCHOR_X;
 
-	if (value == DC_ELMERS_DEFAULT_POSITION_STATE_X)
+	if (value == DC_ELMERS_DEFAULT_ANCHOR_X)
 	{
 		value = NULL();
 	}
@@ -146,32 +146,32 @@ int dc_elmers_set_positioning_x(int value)
 }
 
 // Y axis.
-int dc_elmers_get_positioning_y()
+int dc_elmers_get_anchor_y()
 {
 	char id;
 	int result;
 
 	// Get id.
-	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_POSITION_STATE_Y;
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_ANCHOR_Y;
 
 	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_ELMERS_DEFAULT_POSITION_STATE_Y;
+		result = DC_ELMERS_DEFAULT_ANCHOR_Y;
 	}
 
 	return result;
 }
 
-int dc_elmers_set_positioning_y(int value)
+int dc_elmers_set_anchor_y(int value)
 {
 	char id;
 
 	// Get id.
-	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_POSITION_STATE_Y;
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_ANCHOR_Y;
 
-	if (value == DC_ELMERS_DEFAULT_POSITION_STATE_Y)
+	if (value == DC_ELMERS_DEFAULT_ANCHOR_Y)
 	{
 		value = NULL();
 	}
@@ -180,32 +180,32 @@ int dc_elmers_set_positioning_y(int value)
 }
 
 // z axis.
-int dc_elmers_get_positioning_z()
+int dc_elmers_get_anchor_z()
 {
 	char id;
 	int result;
 
 	// Get id.
-	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_POSITION_STATE_Z;
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_ANCHOR_Z;
 
 	result = getlocalvar(id);
 
 	if (typeof(result) != openborconstant("VT_INTEGER"))
 	{
-		result = DC_ELMERS_DEFAULT_POSITION_STATE_Z;
+		result = DC_ELMERS_DEFAULT_ANCHOR_Z;
 	}
 
 	return result;
 }
 
-int dc_elmers_set_positioning_z(int value)
+int dc_elmers_set_anchor_z(int value)
 {
 	char id;
 
 	// Get id.
-	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_POSITION_STATE_Z;
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_ANCHOR_Z;
 
-	if (value == DC_ELMERS_DEFAULT_POSITION_STATE_Z)
+	if (value == DC_ELMERS_DEFAULT_ANCHOR_Z)
 	{
 		value = NULL();
 	}

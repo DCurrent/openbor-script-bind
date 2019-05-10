@@ -37,7 +37,7 @@ int dc_elmers_set_invert_x(int value)
 		value = NULL();
 	}
 	
-	setlocalvar(id, NULL());		
+	setlocalvar(id, value);		
 }
 
 // Invert Y offset settings.

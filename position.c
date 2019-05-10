@@ -23,7 +23,7 @@ float dc_elmers_find_target_position_x()
 	target = dc_elmers_get_target();
 
 	// Let's get the positioning setting and decide what to do.
-	positioning = dc_elmers_get_positioning_x();
+	positioning = dc_elmers_get_anchor_x();
 
 	if (positioning == DC_ELMERS_MODE_DISABLED)
 	{
@@ -64,7 +64,7 @@ float dc_elmers_find_target_position_y()
 	target = dc_elmers_get_target();
 
 	// Let's get the positioning setting and decide what to do.
-	positioning = dc_elmers_get_positioning_y();
+	positioning = dc_elmers_get_anchor_y();
 
 	if (positioning == DC_ELMERS_MODE_DISABLED)
 	{
@@ -99,13 +99,13 @@ float dc_elmers_find_target_position_z()
 	void target;		// Target entity;
 	int positioning;	// Positioning type.
 	float result;		// Final output.
-	
+
 	// Entities.
 	ent = dc_elmers_get_entity();
 	target = dc_elmers_get_target();
 
 	// Let's get the positioning setting and decide what to do.
-	positioning = dc_elmers_get_positioning_z();
+	positioning = dc_elmers_get_anchor_z();
 
 	if (positioning == DC_ELMERS_MODE_DISABLED)
 	{
@@ -185,7 +185,7 @@ void dc_elmers_reposition_to_offset()
 	pos_z = get_entity_property(ent, "position_z");
 
 	// X
-	if (dc_elmers_get_positioning_x() != DC_ELMERS_MODE_DISABLED)
+	if (dc_elmers_get_anchor_x() != DC_ELMERS_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
@@ -196,7 +196,7 @@ void dc_elmers_reposition_to_offset()
 	}
 
 	// Y
-	if (dc_elmers_get_positioning_y() != DC_ELMERS_MODE_DISABLED)
+	if (dc_elmers_get_anchor_y() != DC_ELMERS_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
@@ -207,7 +207,7 @@ void dc_elmers_reposition_to_offset()
 	}
 
 	// Z
-	if (dc_elmers_get_positioning_y() != DC_ELMERS_MODE_DISABLED)
+	if (dc_elmers_get_anchor_y() != DC_ELMERS_MODE_DISABLED)
 	{
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
@@ -299,7 +299,7 @@ float dc_elmers_find_position_with_offset_x()
 
 	offset = dc_elmers_find_scaled_offset_x();
 
-	if (dc_elmers_get_positioning_x() != DC_ELMERS_MODE_DISABLED)
+	if (dc_elmers_get_anchor_x() != DC_ELMERS_MODE_DISABLED)
 	{
 		// If target is facing left and 
 		// inverting is enabled, then
@@ -338,7 +338,7 @@ float dc_elmers_find_position_with_offset_y()
 
 	offset = dc_elmers_find_scaled_offset_y();
 
-	if (dc_elmers_get_positioning_x() != DC_ELMERS_MODE_DISABLED)
+	if (dc_elmers_get_anchor_x() != DC_ELMERS_MODE_DISABLED)
 	{
 		position += offset;
 	}
@@ -361,7 +361,7 @@ float dc_elmers_find_position_with_offset_z()
 
 	offset = dc_elmers_get_offset_z();
 
-	if (dc_elmers_get_positioning_x() != DC_ELMERS_MODE_DISABLED)
+	if (dc_elmers_get_anchor_x() != DC_ELMERS_MODE_DISABLED)
 	{
 		position += offset;
 	}
@@ -381,7 +381,7 @@ void dc_elmers_adjust_distance_to_x()
 {
 	void ent;
 
-	float pos_old; 
+	float pos_old;
 	float pos_final;
 	int adjust;
 
@@ -393,7 +393,7 @@ void dc_elmers_adjust_distance_to_x()
 	// Get our final "goal" posiiton. We'll decide how (or if)
 	// to adjust it below.
 	pos_final = dc_elmers_find_position_with_offset_x();
-		   
+
 	// If the distance to our target location is less than
 	// adjustment, then there's no reason to adjust the final
 	// goal position.
@@ -417,7 +417,7 @@ void dc_elmers_adjust_distance_to_x()
 			pos_final += adjust;
 		}
 	}
-	
+
 	set_entity_property(ent, "position_x", pos_final);
 }
 
