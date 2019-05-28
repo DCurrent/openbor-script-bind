@@ -116,6 +116,9 @@ void dc_elmers_end_grapple()
 	// Makes final position adjustment and ends bind.
 	dc_elmers_quick_release();
 
+	// Restore old can damage.
+	dc_elmers_apply_can_damage_old();
+
 	// Reset the instance. This is both to
 	// save memory and ensure we
 	// don't have conflicts later.
