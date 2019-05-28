@@ -40,7 +40,7 @@ void dc_elmers_quick_motion(void ent)
 	dc_elmers_set_bind_property("sort_id", 1);
 	
 	// Default bind to animation + frame and remove on no match.
-	dc_elmers_set_bind_animation_match(openborconstant("BIND_ANIMATION_TARGET")+openborconstant("BIND_ANIMATION_REMOVE")+openborconstant("BIND_ANIMATION_FRAME_TARGET")+openborconstant("BIND_ANIMATION_FRAME_REMOVE"));
+	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_TARGET")+openborconstant("BIND_ANIMATION_REMOVE")+openborconstant("BIND_ANIMATION_FRAME_TARGET")+openborconstant("BIND_ANIMATION_FRAME_REMOVE"));
 
 	dc_elmers_quick_offset_to_bind();
 	dc_elmers_apply_palette_match();

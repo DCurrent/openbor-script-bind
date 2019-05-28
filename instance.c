@@ -8,7 +8,7 @@ int dc_elmers_get_instance()
 	if (!result)
 	{
 		result = DC_ELMERS_DEFAULT_INSTANCE;
-	}
+	}	
 
 	return result;
 }

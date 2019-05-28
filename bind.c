@@ -4,28 +4,9 @@
 #import "data/scripts/dc_elmers/entity.c"
 #import "data/scripts/dc_elmers/offset.c"
 #import "data/scripts/dc_elmers/palette.c"
+#import "data/scripts/dc_elmers/position.c"
 
-// Caskey, Damon V.
-//
-// Unlink entities. Performs same function as native unlink.
-void dc_elmers_break_native_link()
-{
-	void target = dc_elmers_get_target();
-	void link;
-
-	link = get_entity_property(target, "link");
-
-	if (link)
-	{
-		set_entity_property(link, "link", NULL());
-		set_entity_property(link, "grab_target", NULL());
-	}
-
-	set_entity_property(target, "link", NULL());
-	set_entity_property(target, "grab_target", NULL());
-}
-
-void dc_elmers_set_bind_animation_id(int value)
+void dc_elmers_set_animation_id(int value)
 {
 	void ent;
 	void bind;
@@ -40,7 +21,7 @@ void dc_elmers_set_bind_animation_id(int value)
 	return bind;
 }
 
-void dc_elmers_set_bind_animation_frame(int value)
+void dc_elmers_set_frame(int value)
 {
 	void ent;
 	void bind;
@@ -55,7 +36,7 @@ void dc_elmers_set_bind_animation_frame(int value)
 	return bind;
 }
 
-void dc_elmers_set_bind_animation_match(int value)
+void dc_elmers_set_animation_match(int value)
 {
 	void ent;
 	void bind;
@@ -70,7 +51,7 @@ void dc_elmers_set_bind_animation_match(int value)
 	return bind;
 }
 
-void dc_elmers_set_bind_direction(int value)
+void dc_elmers_set_direction(int value)
 {
 	void ent;
 	void bind;
@@ -85,7 +66,7 @@ void dc_elmers_set_bind_direction(int value)
 	return bind;
 }
 
-void dc_elmers_set_bind_sort_id(int value)
+void dc_elmers_set_sorting(int value)
 {
 	void ent;
 	void bind;
@@ -100,7 +81,7 @@ void dc_elmers_set_bind_sort_id(int value)
 	return bind;
 }
 
-void dc_elmers_set_bind_target(void value)
+void dc_elmers_set_target(void value)
 {
 	void ent;
 	void bind;
@@ -206,6 +187,8 @@ void dc_elmers_quick_release()
 	bind = get_entity_property(ent, "bind");
 
 	set_bind_property(bind, "target", NULL());
+
+	dc_elmers_apply_position();
 
 	return bind;
 }
