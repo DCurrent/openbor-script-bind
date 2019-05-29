@@ -29,6 +29,7 @@
 #import		"data/scripts/dc_elmers/entity.c"
 #import		"data/scripts/dc_elmers/instance.c"
 #import		"data/scripts/dc_elmers/offset.c"
+#import		"data/scripts/dc_elmers/tag.c"
 
 // Caskey, Damon V.
 // 2019-05-13
@@ -76,10 +77,12 @@ void dc_elmers_initialize_grapple()
 	dc_elmers_set_animation_id(DC_ELMERS_REACT_ANIMATION);
 
 	// Disable can damage property so we can't hit
-	// the grapple controller. Make sure to record
-	// the value first as can damage old so we can 
-	// restore it when we are finished.
-	dc_elmers_set_can_damage_old(getentityproperty(ent, "candamage"));
+	// the grapple controller. We need to restore it
+	// when finished, and possibly with another script
+	// event, so we'll record the old value into bind
+	// tag property first.
+	dc_elmers_set_tag(getentityproperty(ent, "candamage"));
+	dc_elmers_apply_tag();
 	dc_elmers_set_can_damage(DC_ELMERS_CAN_DAMAGE_NONE);
 	dc_elmers_apply_can_damage();
 }
@@ -116,8 +119,10 @@ void dc_elmers_end_grapple()
 	// Makes final position adjustment and ends bind.
 	dc_elmers_quick_release();
 
-	// Restore old can damage.
-	dc_elmers_apply_can_damage_old();
+	// Restore the candamage value we stored 
+	// in bind tag.
+	dc_elmers_set_can_damage(dc_elmers_set_tag_from_property());
+	dc_elmers_apply_can_damage();
 
 	// Reset the instance. This is both to
 	// save memory and ensure we
@@ -148,4 +153,81 @@ void dc_elmers_break_native_link()
 
 	set_entity_property(target, "link", NULL());
 	set_entity_property(target, "grab_target", NULL());
+}
+
+
+// Caskey, Damon V.
+// 2018-08-27
+//
+// Release all of the target entity's grappled
+// targets. Call this when the target is damaged
+// or gets interrupted some way before it can finish
+// a grapple move.
+int dc_elmers_disrupt_grapple()
+{
+	void target;
+	int i;					// Loop cursor.
+	int entity_count;		// Entites on screen.
+	int entity_exists;		// Entity cursor is not a dangling pointer.
+	void entity_cursor;		// Entity in loop.
+	int drop;				// Falling state.
+	void bind;				// Binding property.
+	void bind_target;		// 
+	int animation_current;
+	int release_count;		// How many entities have been released?
+
+	target = dc_elmers_get_target();
+
+	release_count = 0;
+	entity_count = openborvariant("count_entities");
+
+	// Loop through entity collection.
+	for (i = 0; i < entity_count; i++)
+	{
+		// Get entity cursor for this loop increment.
+		entity_cursor = getentity(i);
+
+		// Make sure we got a valid target pointer.
+		if (!entity_cursor)
+		{
+			continue;
+		}
+
+		// Make sure the entity exists in play. We perform this
+		// check because it's possible for an entity to be
+		// removed but its pointer is still valid.
+		entity_exists = getentityproperty(entity_cursor, "exists");
+
+		if (!entity_exists)
+		{
+			continue;
+		}
+
+		// In a grappled pose?
+		animation_current = get_entity_property(entity_cursor, "animation_id");
+
+		if (animation_current != DC_ELMERS_REACT_ANIMATION)
+		{
+			continue;
+		}
+
+		// Bound to function's target?
+		bind = get_entity_property(entity_cursor, "bind");
+		bind_target = get_bind_property(bind, "target");
+
+		if (bind_target != target)
+		{
+			continue;
+		}
+
+		// Release bind and knock entity down to ensure
+		// it is "reset".
+		set_bind_property(bind, "target", NULL());
+		//damageentity(entity_cursor, target, DC_GRAPPLE_RESET_FORCE, DC_GRAPPLE_RESET_DROP, openborconstant("ATK_NORMAL"));
+
+		// Increment reelase count;
+		release_count++;
+	}
+
+	return release_count;
 }

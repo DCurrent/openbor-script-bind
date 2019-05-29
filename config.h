@@ -106,6 +106,7 @@
 #define DC_ELMERS_DEFAULT_SCREEN_X				dc_elmers_find_screen_center_x()
 #define DC_ELMERS_DEFAULT_SCREEN_Y				dc_elmers_find_screen_center_y()
 #define DC_ELMERS_DEFAULT_SCREEN_Z				openborconstant("SCREENPANEL_Z")
+#define DC_ELMERS_DEFAULT_TAG					NULL()
 #define DC_ELMERS_DEFAULT_TARGET				getlocalvar("self")
 
 // Variable keys. Used to identify cross function
@@ -133,8 +134,9 @@
 #define DC_ELMERS_MEMBER_ANCHOR_X				DC_ELMERS_BASE_ID + 20
 #define DC_ELMERS_MEMBER_ANCHOR_Y				DC_ELMERS_BASE_ID + 21
 #define DC_ELMERS_MEMBER_ANCHOR_Z				DC_ELMERS_BASE_ID + 22
-#define DC_ELMERS_MEMBER_TARGET					DC_ELMERS_BASE_ID + 23
-#define DC_ELMERS_MEMBER_THE_END				24				// Should always last, with a value one higher than previous key ID.
+#define DC_ELMERS_MEMBER_TAG					DC_ELMERS_BASE_ID + 23
+#define DC_ELMERS_MEMBER_TARGET					DC_ELMERS_BASE_ID + 24
+#define DC_ELMERS_MEMBER_THE_END				25				// Should always last, with a value one higher than previous key ID.
 
 // Misc hard code values
 #define DC_ELMERS_DRAWMETHOD_SCALE_MAX_X	256

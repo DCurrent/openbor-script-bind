@@ -14,3 +14,4 @@
 #import "data/scripts/dc_elmers/palette.c"
 #import "data/scripts/dc_elmers/position.c"
 #import "data/scripts/dc_elmers/position_config.c"
+#import "data/scripts/dc_elmers/tag.c"
