@@ -33,6 +33,12 @@
 
 #define DC_ELMERS_DEFAULT_BLAST_STATE		openborconstant("BLAST_ATTACK")
 
+// -- Resetting the grappled entity when interrupted.
+#define DC_ELMERS_RESET_ATTACK_TYPE			openborconstant("ATK_NORMAL")	// Drop force grabbed entity takes when grapple is interrupted.
+#define DC_ELMERS_RESET_ATTACK_FORCE		0								// Damage grabbed entity takes when grapple is interrupted.
+#define DC_ELMERS_RESET_ATTACK_DROP			100								// Drop force grabbed entity takes when grapple is interrupted.
+
+
 // -- Sorting of grappled entity.
 #define DC_ELMERS_SORT_BACK		-1
 #define DC_ELMERS_SORT_FRONT	1

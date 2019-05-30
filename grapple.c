@@ -211,7 +211,7 @@ int dc_elmers_disrupt_grapple()
 			continue;
 		}
 
-		// Bound to function's target?
+		// Bound to target?
 		bind = get_entity_property(entity_cursor, "bind");
 		bind_target = get_bind_property(bind, "target");
 
@@ -223,7 +223,7 @@ int dc_elmers_disrupt_grapple()
 		// Release bind and knock entity down to ensure
 		// it is "reset".
 		set_bind_property(bind, "target", NULL());
-		//damageentity(entity_cursor, target, DC_GRAPPLE_RESET_FORCE, DC_GRAPPLE_RESET_DROP, openborconstant("ATK_NORMAL"));
+		damageentity(entity_cursor, target, DC_ELMERS_RESET_ATTACK_FORCE, DC_ELMERS_RESET_ATTACK_DROP, DC_ELMERS_RESET_ATTACK_TYPE);
 
 		// Increment reelase count;
 		release_count++;
