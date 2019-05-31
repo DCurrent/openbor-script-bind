@@ -2,6 +2,7 @@
 #define DC_ELMERS_CONFIG 1
 
 // Dependencies
+#include "data/scripts/dc_disney/main.c"
 #include "data/scripts/dc_math/main.c"
 
 // Name of library. Used mainly as a base for variable IDs. Must
@@ -38,7 +39,6 @@
 #define DC_ELMERS_RESET_ATTACK_FORCE		0								// Damage grabbed entity takes when grapple is interrupted.
 #define DC_ELMERS_RESET_ATTACK_DROP			100								// Drop force grabbed entity takes when grapple is interrupted.
 
-
 // -- Sorting of grappled entity.
 #define DC_ELMERS_SORT_BACK		-1
 #define DC_ELMERS_SORT_FRONT	1
@@ -47,6 +47,12 @@
 // -- Ability to damage other entities when NOT
 // being thrown (i.e. blast state).
 #define DC_ELMERS_CAN_DAMAGE_NONE 0
+
+// -- Grapple animations
+#define DC_ELMERS_SWITCH_TO_BACK				openborconstant("ANI_FOLLOW11")
+#define DC_ELMERS_SWITCH_TO_FRONT				openborconstant("ANI_FOLLOW12")
+#define DC_ELMERS_GRAB_BACK						openborconstant("ANI_GRAB")
+#define DC_ELMERS_GRABBED_BACK					openborconstant("ANI_GRABBED")
 
 // -- Reaction animation (pose collection).
 #define DC_ELMERS_REACT_ANIMATION				openborconstant("ANI_FOLLOW10")

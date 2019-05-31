@@ -67,7 +67,7 @@ void dc_elmers_initialize_grapple()
 	// Break openbor native grab system link if it exists. If we 
 	// don't do this, the native grab system overrides binding 
 	// sort ID.
-	dc_elmers_break_native_link();
+	dc_elmers_end_native_link();
 
 	// Set binding to match a manually defined animation ID and
 	// animation frame. Then set the manual animation ID property
@@ -134,11 +134,75 @@ void dc_elmers_end_grapple()
 }
 
 // Caskey, Damon V.
+// 2019-05-31 
+// 
+// Establish a native grab with following exceptions:
+// - No location adjustment. 
+// - No direction adjustment.
+void dc_elmers_apply_grab()
+{
+	void ent;
+	void target;
+	int elapsed_time;
+
+	float pos_x;
+	float pos_z;	
+	int direction;
+
+	// Entity is us. Target is the entity grabbing us.
+	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
+
+	// Dograb() takes care of the gazillion flags
+	// and actions needed for starting a grapple in 
+	// one call, and because its native code can do 
+	// the work much faster than we could manage with 
+	// script. But it also relocates us and switches 
+	// directions, which in this case we don't want.
+	//
+	// Let's get that information here so we can 
+	// restore it soon as the dograb function is complete.
+	pos_x = get_entity_property(ent, "position_x");
+	pos_z = get_entity_property(ent, "position_z");	
+	direction = get_entity_property(ent, "position_direction");
+
+	// Target grabs us!
+	dograb(target, ent);
+
+	// Now restore our position and direction.
+	set_entity_property(ent, "position_x", pos_x);
+	set_entity_property(ent, "position_x", pos_z);
+	set_entity_property(ent, "position_direction", direction);
+}
+
+// Caskey, Damon V.
+// 2019-05-31
+//
+// Connect target's native grab to us. Similar to dograb, but
+// we're only setting the record keeping, not the alignment,
+// direction, takeaction, etc.
+void dc_elmers_apply_native_link()
+{
+	void target = dc_elmers_get_target();
+	void ent = dc_elmers_get_entity();
+	void link;
+
+	link = get_entity_property(target, "link");
+
+	// Target grabs us.
+	set_entity_property(target, "grab_target", ent);
+	
+	// Link target and us together.
+	set_entity_property(ent, "link", target);
+	set_entity_property(target, "link", ent);
+}
+
+// Caskey, Damon V.
 // 2019-05-13
 //
 // Release target's native grab (presumably from holding us). 
 // Based on native internal ent_unlink() function.
-void dc_elmers_break_native_link()
+void dc_elmers_end_native_link()
 {
 	void target = dc_elmers_get_target();
 	void link;
@@ -154,7 +218,6 @@ void dc_elmers_break_native_link()
 	set_entity_property(target, "link", NULL());
 	set_entity_property(target, "grab_target", NULL());
 }
-
 
 // Caskey, Damon V.
 // 2018-08-27
@@ -230,4 +293,32 @@ int dc_elmers_disrupt_grapple()
 	}
 
 	return release_count;
+}
+
+// Caskey, Damon V.
+// 2018-11-01
+//
+// Verify conditions for switching sides and do it if possible.
+void dc_elmers_side_switch()
+{
+	void target;
+
+	target = dc_elmers_get_target();	
+
+	performattack(target, DC_ELMERS_SWITCH_TO_BACK);
+
+	// Must have a switch to back.
+	if (!getentityproperty(target, "animvalid", DC_ELMERS_SWITCH_TO_BACK))
+	{
+		return 0;
+	}
+
+	if (get_entity_property(target, "animation_id") == openborconstant("ANI_GRAB"))
+	{
+		dc_disney_perform_attack(DC_ELMERS_SWITCH_TO_BACK);
+	}
+	else if (get_entity_property(target, "animation_id") == DC_ELMERS_GRAB_BACK)
+	{
+		dc_disney_perform_attack(DC_ELMERS_SWITCH_TO_FRONT);
+	}	
 }
