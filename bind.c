@@ -1,10 +1,12 @@
 #include "data/scripts/dc_elmers/config.h"
 
+
 #import "data/scripts/dc_elmers/direction.c"
 #import "data/scripts/dc_elmers/entity.c"
 #import "data/scripts/dc_elmers/offset.c"
 #import "data/scripts/dc_elmers/palette.c"
 #import "data/scripts/dc_elmers/position.c"
+#import "data/scripts/dc_elmers/position_config.c"
 
 void dc_elmers_set_animation_id(int value)
 {
@@ -127,18 +129,20 @@ void dc_elmers_set_bind_property(char prop_name, int the_value)
 // Caskey, Damon V.
 // 2019-03-13
 //
-// Applies calulated offsets to bind.
+// Applies calculated offsets to bind.
 void dc_elmers_quick_offset_to_bind()
 {
+	void target;
 	void ent;
 	void bind;
 
 	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
 
 	bind = get_entity_property(ent, "bind");
 
-	set_bind_property(bind, "offset_x", dc_elmers_find_scaled_offset_x());
-	set_bind_property(bind, "offset_y", dc_elmers_find_scaled_offset_y());
+	set_bind_property(bind, "offset_x", dc_elmers_find_scaled_offset_x(target, dc_elmers_get_offset_x()));
+	set_bind_property(bind, "offset_y", dc_elmers_find_scaled_offset_y(target, dc_elmers_get_offset_y()));
 	set_bind_property(bind, "offset_z", dc_elmers_get_offset_z());
 
 	return bind;
@@ -160,9 +164,9 @@ void dc_elmers_quick_bind()
 
 	set_bind_property(bind, "target", target);
 
-	set_bind_property(bind, "mode_x", openborconstant("BIND_MODE_TARGET"));
-	set_bind_property(bind, "mode_y", openborconstant("BIND_MODE_TARGET"));
-	set_bind_property(bind, "mode_z", openborconstant("BIND_MODE_TARGET"));
+	set_bind_property(bind, "mode_x", dc_elmers_get_anchor_x());
+	set_bind_property(bind, "mode_y", dc_elmers_get_anchor_y());
+	set_bind_property(bind, "mode_z", dc_elmers_get_anchor_z());
 
 	set_bind_property(bind, "direction", dc_elmers_get_direction());
 	

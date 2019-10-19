@@ -76,8 +76,6 @@ void dc_elmers_apply_palette_match()
 
 		case DC_ELMERS_PALETTE_MATCH_TABLE:
 
-			log("\n DC_ELMERS_PALETTE_MATCH_TABLE");
-
 			// Set our color table pointer to the target's.
 
 			void drawmethod_ent;

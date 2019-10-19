@@ -21,3 +21,12 @@ Elmer's glue, what else. :)
 ## Use Cases
 
 In progress.
+
+## Double Bind
+
+Double bind is designed to deal with special grapples where we need both the grappled and the grappler entities bound to each other. Think of moves like a swing DDT, the vaulting system from Streets of Rage, or any sort of move where the grappler mounts onto the grappled. 
+
+## Position
+
+Positioning is possible without binding. This is usful when you want to make a quick adjustment to an entity's position or for making effects like Ken's Shinryuken where the opponent is drawn in. The positioning functions can get a bit complicated as they are designed to work just like binding.
+

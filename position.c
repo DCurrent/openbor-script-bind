@@ -163,6 +163,7 @@ void dc_elmers_apply_position()
 void dc_elmers_reposition_to_offset()
 {
 	void ent;
+	void target;
 
 	// Offsets.
 	int offset;
@@ -178,6 +179,7 @@ void dc_elmers_reposition_to_offset()
 
 	// Get entities.
 	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_target();
 
 	// Get entity location for each axis.
 	pos_x = get_entity_property(ent, "position_x");
@@ -187,9 +189,12 @@ void dc_elmers_reposition_to_offset()
 	// X
 	if (dc_elmers_get_anchor_x() != DC_ELMERS_MODE_DISABLED)
 	{
+		
+		offset = dc_elmers_get_offset_x();
+
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
-		if (dc_math_compare_unisgned_float(dc_elmers_find_distance_to_target_x(), dc_elmers_find_scaled_offset_x()))
+		if (dc_math_compare_unisgned_float(dc_elmers_find_distance_to_target_x(), dc_elmers_find_scaled_offset_x(target, offset)))
 		{
 			pos_x += dc_elmers_find_offset_with_invert_x();
 		}
@@ -198,9 +203,11 @@ void dc_elmers_reposition_to_offset()
 	// Y
 	if (dc_elmers_get_anchor_y() != DC_ELMERS_MODE_DISABLED)
 	{
+		offset = dc_elmers_get_offset_y();
+
 		// If the scaled offset is less than distance to target,
 		// then get a finalized offset and add it to position.
-		if (dc_math_compare_unisgned_float(dc_elmers_find_distance_to_target_y(), dc_elmers_find_scaled_offset_y()))
+		if (dc_math_compare_unisgned_float(dc_elmers_find_distance_to_target_y(), dc_elmers_find_scaled_offset_y(target, offset)))
 		{
 			pos_y += dc_elmers_find_offset_with_invert_y();
 		}
@@ -295,9 +302,11 @@ float dc_elmers_find_position_with_offset_x()
 	float position;
 	void target;
 
-	position = dc_elmers_find_target_position_x();
+	target = dc_elmers_get_target();
 
-	offset = dc_elmers_find_scaled_offset_x();
+	position = dc_elmers_find_target_position_x();
+		
+	offset = dc_elmers_find_scaled_offset_x(target, dc_elmers_get_offset_x());
 
 	if (dc_elmers_get_anchor_x() != DC_ELMERS_MODE_DISABLED)
 	{
@@ -305,7 +314,6 @@ float dc_elmers_find_position_with_offset_x()
 		// inverting is enabled, then
 		// we invert the offset before
 		// applying it to position.	
-		target = dc_elmers_get_target();
 
 		direction = get_entity_property(target, "position_direction");
 
@@ -333,10 +341,13 @@ float dc_elmers_find_position_with_offset_y()
 {
 	int offset;
 	float position;
+	void target;
+
+	target = dc_elmers_get_target();
 
 	position = dc_elmers_find_target_position_y();
 
-	offset = dc_elmers_find_scaled_offset_y();
+	offset = dc_elmers_find_scaled_offset_y(target, dc_elmers_get_offset_y());
 
 	if (dc_elmers_get_anchor_x() != DC_ELMERS_MODE_DISABLED)
 	{

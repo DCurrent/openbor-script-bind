@@ -74,3 +74,19 @@ void dc_elmers_set_target(void value)
 
 	setlocalvar(id, value);
 }
+
+// Caskey, Damon V.
+// 2019-06-15
+//
+// Swap target and entity members.
+void dc_elmers_swap_entities()
+{
+	void ent;
+	void target;
+
+	target = dc_elmers_get_target();
+	ent = dc_elmers_get_entity();
+
+	dc_elmers_set_entity(target);
+	dc_elmers_set_target(ent);
+}
