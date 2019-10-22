@@ -65,7 +65,9 @@
 // -- Reaction animation (pose collection).
 #define DC_ELMERS_REACT_ANIMATION				openborconstant("ANI_FOLLOW10")
 
-// -- Reaction frames (poses).
+// -- Reaction frames (poses). These set the frame to play from
+// reaction control animation. The animation's frame order MUST 
+// match up with this list to work properly.
 #define DC_ELMERS_REACT_FALLING_UP_0			0							
 #define DC_ELMERS_REACT_FALLING_UP_TILT_0		1
 #define DC_ELMERS_REACT_HELD_0					2
@@ -88,15 +90,16 @@
 #define DC_ELMERS_REACT_PAIN_MID_1				16
 #define DC_ELMERS_REACT_PAIN_MID_2				17
 #define DC_ELMERS_REACT_TILT_DOWN_0				18
-#define DC_ELMERS_REACT_TILT_UP_0				19
-#define DC_ELMERS_REACT_VERTICAL_DOWN_0			20
-#define DC_ELMERS_REACT_VERTICAL_DOWN_PAIN_0	21
-#define DC_ELMERS_REACT_VERTICAL_DOWN_PAIN_1	22
-#define DC_ELMERS_REACT_VERTICAL_DOWN_PAIN_2	23
-#define DC_ELMERS_REACT_VERTICAL_UP_0			24
-#define DC_ELMERS_REACT_VERTICAL_UP_PAIN_0		25	
-#define DC_ELMERS_REACT_VERTICAL_UP_PAIN_1		26
-#define DC_ELMERS_REACT_VERTICAL_UP_PAIN_2		27
+#define DC_ELMERS_REACT_TILT_FORWARD_0			19
+#define DC_ELMERS_REACT_TILT_UP_0				20
+#define DC_ELMERS_REACT_VERTICAL_DOWN_0			21
+#define DC_ELMERS_REACT_VERTICAL_DOWN_PAIN_0	22
+#define DC_ELMERS_REACT_VERTICAL_DOWN_PAIN_1	23
+#define DC_ELMERS_REACT_VERTICAL_DOWN_PAIN_2	24
+#define DC_ELMERS_REACT_VERTICAL_UP_0			25
+#define DC_ELMERS_REACT_VERTICAL_UP_PAIN_0		26	
+#define DC_ELMERS_REACT_VERTICAL_UP_PAIN_1		27
+#define DC_ELMERS_REACT_VERTICAL_UP_PAIN_2		28
 
 
 // Default values.
