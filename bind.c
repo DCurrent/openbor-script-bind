@@ -111,7 +111,14 @@ int dc_elmers_get_bind_property(char prop_name)
 	return get_bind_property(bind, prop_name);
 }
 
-void dc_elmers_set_bind_property(char prop_name, int the_value)
+// Caskey, Damon V.
+// 2019-~03
+//
+// Set a bind property by name to ent member.
+// used to adjust bind property that does not
+// have a specific function defined for it in 
+// this library.
+void dc_elmers_set_bind_property(void prop_name, int the_value)
 {
 	void ent;
 	void bind;
@@ -120,6 +127,10 @@ void dc_elmers_set_bind_property(char prop_name, int the_value)
 
 	// Get bind pointer.
 	bind = get_entity_property(ent, "bind");
+
+	char hp_prop = "hp_old";
+
+	set_entity_property(ent, hp_prop, 0);
 
 	set_bind_property(bind, prop_name, the_value);
 
