@@ -180,8 +180,8 @@ void dc_elmers_quick_bind()
 	set_bind_property(bind, "mode_z", dc_elmers_get_anchor_z());
 
 	set_bind_property(bind, "direction", dc_elmers_get_direction());
-	
-	dc_elmers_quick_offset_to_bind();	
+
+	dc_elmers_quick_offset_to_bind();
 
 	dc_elmers_apply_palette_match();
 
@@ -241,7 +241,7 @@ void dc_elmers_find_first_bound(void ent)
 		if (ent == get_bind_property(bind, "target"))
 		{
 			return ent_cursor;
-		}		
+		}
 	}
 
 	// Didn't find any entity bound to 
