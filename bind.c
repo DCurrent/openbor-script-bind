@@ -3,6 +3,7 @@
 
 #import "data/scripts/dc_elmers/direction.c"
 #import "data/scripts/dc_elmers/entity.c"
+#import "data/scripts/dc_elmers/instance.c"
 #import "data/scripts/dc_elmers/offset.c"
 #import "data/scripts/dc_elmers/palette.c"
 #import "data/scripts/dc_elmers/position.c"
@@ -53,12 +54,60 @@ void dc_elmers_set_animation_match(int value)
 	return bind;
 }
 
-void dc_elmers_apply_bind_direction(int value)
+int dc_elmers_get_bind_direction()
+{
+	char id;
+	int result;
+
+	// Get id.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_BIND_DIRECTION;
+
+	result = getlocalvar(id);
+
+	if (typeof(result) != openborconstant("VT_INTEGER"))
+	{
+		result = DC_ELMERS_DEFAULT_BIND_DIRECTION;
+	}
+
+	return result;
+}
+
+//
+
+int dc_elmers_set_bind_direction(int value)
+{
+	char id;
+
+	// Get ID.
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_BIND_DIRECTION;
+
+	// If value is default, make sure the variable
+	// is deleted.
+	if (value == DC_ELMERS_DEFAULT_BIND_DIRECTION)
+	{
+		value = NULL();
+	}
+
+	setlocalvar(id, value);
+}
+
+// Set new value to member and apply to bind property.
+void dc_elmers_alter_bind_direction(int value)
+{
+	dc_elmers_set_bind_direction(value);
+	dc_elmers_apply_bind_direction();
+}
+
+// Apply member value to bind property.
+void dc_elmers_apply_bind_direction()
 {
 	void ent;
 	void bind;
+	int value;
 
+	// Get entity and value.
 	ent = dc_elmers_get_entity();
+	value = dc_elmers_get_bind_direction();
 
 	// Get bind pointer.
 	bind = get_entity_property(ent, "bind");
@@ -67,6 +116,8 @@ void dc_elmers_apply_bind_direction(int value)
 
 	return bind;
 }
+
+//
 
 void dc_elmers_set_sorting(int value)
 {
@@ -180,8 +231,8 @@ void dc_elmers_quick_bind()
 	set_bind_property(bind, "mode_z", dc_elmers_get_anchor_z());
 
 	set_bind_property(bind, "direction", dc_elmers_get_direction());
-
-	dc_elmers_quick_offset_to_bind();
+	
+	dc_elmers_quick_offset_to_bind();	
 
 	dc_elmers_apply_palette_match();
 
@@ -241,7 +292,7 @@ void dc_elmers_find_first_bound(void ent)
 		if (ent == get_bind_property(bind, "target"))
 		{
 			return ent_cursor;
-		}
+		}		
 	}
 
 	// Didn't find any entity bound to 

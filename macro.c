@@ -23,7 +23,7 @@
 // - Blade motion trails
 // - Auras
 void dc_elmers_quick_particle(void ent)
-{
+{	
 	void target;
 	void bind;
 
@@ -31,9 +31,9 @@ void dc_elmers_quick_particle(void ent)
 	dc_elmers_reset_instance();
 
 	// Seems redeundant, but gets default if ent is blank.
-	dc_elmers_set_entity(ent);
-	ent = dc_elmers_get_entity(ent);
-
+	dc_elmers_set_entity(ent);	
+	ent = dc_elmers_get_entity(ent);		
+	
 	target = dc_elmers_get_target();
 
 	bind = get_entity_property(ent, "bind");
@@ -43,13 +43,14 @@ void dc_elmers_quick_particle(void ent)
 	set_bind_property(bind, "mode_x", openborconstant("BIND_MODE_TARGET"));
 	set_bind_property(bind, "mode_y", openborconstant("BIND_MODE_TARGET"));
 	set_bind_property(bind, "mode_z", openborconstant("BIND_MODE_TARGET"));
-	set_bind_property(bind, "direction", openborconstant("DIRECTION_ADJUST_SAME"));
 
+	dc_elmers_alter_bind_direction(openborconstant("DIRECTION_ADJUST_SAME"));
+	
 	// Default sort to front.
 	dc_elmers_set_sorting(DC_ELMERS_SORT_FRONT);
-
+		
 	// Default bind to animation + frame and remove on no match.
-	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_TARGET") + openborconstant("BIND_ANIMATION_REMOVE") + openborconstant("BIND_ANIMATION_FRAME_TARGET") + openborconstant("BIND_ANIMATION_FRAME_REMOVE"));
+	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_TARGET")+openborconstant("BIND_ANIMATION_REMOVE")+openborconstant("BIND_ANIMATION_FRAME_TARGET")+openborconstant("BIND_ANIMATION_FRAME_REMOVE"));
 
 	dc_elmers_quick_offset_to_bind();
 	dc_elmers_apply_palette_match();
@@ -89,7 +90,8 @@ void dc_elmers_quick_particle_free(void ent)
 	set_bind_property(bind, "mode_x", openborconstant("BIND_MODE_TARGET"));
 	set_bind_property(bind, "mode_y", openborconstant("BIND_MODE_TARGET"));
 	set_bind_property(bind, "mode_z", openborconstant("BIND_MODE_TARGET"));
-	set_bind_property(bind, "direction", openborconstant("DIRECTION_ADJUST_SAME"));
+
+	dc_elmers_alter_bind_direction(openborconstant("DIRECTION_ADJUST_SAME"));
 
 	// Default sort to front.
 	dc_elmers_set_sorting(DC_ELMERS_SORT_FRONT);
@@ -99,6 +101,8 @@ void dc_elmers_quick_particle_free(void ent)
 
 	dc_elmers_quick_offset_to_bind();
 	dc_elmers_apply_palette_match();
+
+	log("\n dc_elmers_quick_particle_free: " + getentityproperty(bind, "defaultname"));
 
 	return bind;
 }
@@ -117,7 +121,7 @@ void dc_elmers_quick_overlay(void ent)
 {
 	void target;
 	void bind;
-
+	
 	// Reset instance so we don’t unintentional apply settings from previous uses.
 	dc_elmers_reset_instance();
 
@@ -134,8 +138,9 @@ void dc_elmers_quick_overlay(void ent)
 	set_bind_property(bind, "mode_x", openborconstant("BIND_MODE_TARGET"));
 	set_bind_property(bind, "mode_y", openborconstant("BIND_MODE_TARGET"));
 	set_bind_property(bind, "mode_z", openborconstant("BIND_MODE_TARGET"));
-	set_bind_property(bind, "direction", openborconstant("DIRECTION_ADJUST_SAME"));
 
+	dc_elmers_alter_bind_direction(openborconstant("DIRECTION_ADJUST_SAME"));
+	
 	// Default sort to front.
 	dc_elmers_set_sorting(DC_ELMERS_SORT_FRONT);
 
@@ -143,9 +148,9 @@ void dc_elmers_quick_overlay(void ent)
 	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_TARGET") + openborconstant("BIND_ANIMATION_REMOVE") + openborconstant("BIND_ANIMATION_FRAME_TARGET") + openborconstant("BIND_ANIMATION_FRAME_REMOVE"));
 
 	dc_elmers_quick_offset_to_bind();
-
+	
 	// Match to target's table.
-	dc_elmers_set_palette_match(DC_ELMERS_PALETTE_MATCH_TABLE);
+	dc_elmers_set_palette_match(DC_ELMERS_PALETTE_MATCH_TABLE);	
 	dc_elmers_apply_palette_match();
 
 	return bind;
@@ -197,12 +202,12 @@ int dc_elmers_find_front_sort()
 	void entity_cursor;		// Entity in loop.
 	void bind;				// Binding property.
 	void bind_target;		// 
-
+	
 	int sort_cursor = 0;
 	int sort_result = 0;
 
 	target = dc_elmers_get_target();
-
+	
 	entity_count = openborvariant("count_entities");
 	sort_result = get_entity_property(target, "sort_id");
 
