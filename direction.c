@@ -28,7 +28,7 @@ int dc_elmers_set_direction(int value)
 	char id;
 
 	// Get ID.
-	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_DIRECTION;	
+	id = dc_elmers_get_instance() + DC_ELMERS_MEMBER_DIRECTION;
 
 	// If value is default, make sure the variable
 	// is deleted.
@@ -64,7 +64,7 @@ int dc_elmers_apply_direction()
 	// If the setting is NONE, these conditions won't apply and we do nothing.
 	if (adjustment == openborconstant("DIRECTION_ADJUST_LEFT"))
 	{
-		set_entity_property(ent, "position_direction", openborconstant("DIRECTION_LEFT"));	
+		set_entity_property(ent, "position_direction", openborconstant("DIRECTION_LEFT"));
 	}
 	else if (adjustment == openborconstant("DIRECTION_ADJUST_RIGHT"))
 	{
@@ -83,6 +83,6 @@ int dc_elmers_apply_direction()
 		else
 		{
 			set_entity_property(ent, "position_direction", openborconstant("DIRECTION_LEFT"));
-		}		
-	}	
+		}
+	}
 }

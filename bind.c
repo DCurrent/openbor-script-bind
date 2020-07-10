@@ -53,7 +53,7 @@ void dc_elmers_set_animation_match(int value)
 	return bind;
 }
 
-void dc_elmers_set_direction(int value)
+void dc_elmers_apply_bind_direction(int value)
 {
 	void ent;
 	void bind;
