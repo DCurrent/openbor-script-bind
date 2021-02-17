@@ -7,7 +7,6 @@
 #import "data/scripts/dc_elmers/direction.c"
 #import "data/scripts/dc_elmers/entity.c"
 #import "data/scripts/dc_elmers/grapple.c"
-#import "data/scripts/dc_elmers/instance.c"
 #import "data/scripts/dc_elmers/level.c"
 #import "data/scripts/dc_elmers/macro.c"
 #import "data/scripts/dc_elmers/offset.c"

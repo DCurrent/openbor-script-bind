@@ -1,7 +1,6 @@
 #include "data/scripts/dc_elmers/config.h"
 
 #import "data/scripts/dc_elmers/entity.c"
-#import "data/scripts/dc_elmers/instance.c"
 
 // Blast is a special state used by the engine to control
 // behavior when falling. It is mainly used for throws and
@@ -12,7 +11,7 @@
 // assuming the model has a land animation. The native AI
 // can not and does not ever use landing ability.
 
-int dc_elmers_get_blast()
+int dc_elmers_get_member_blast()
 {
 	char id;
 	int result;
@@ -30,7 +29,7 @@ int dc_elmers_get_blast()
 	return result;
 }
 
-int dc_elmers_set_blast(int value)
+int dc_elmers_set_member_blast(int value)
 {
 	char id;
 
@@ -57,9 +56,9 @@ void dc_elmers_apply_blast()
 	void ent; 
 	int value;
 	   	 
-	ent = dc_elmers_get_entity();
+	ent = dc_elmers_get_member_entity();
 
-	value = dc_elmers_get_blast();
+	value = dc_elmers_get_member_blast();
 
 	set_entity_property(ent, "blast_state", value);
 }

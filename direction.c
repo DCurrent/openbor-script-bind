@@ -1,11 +1,10 @@
 #include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_elmers/instance.c"
 #import "data/scripts/dc_elmers/entity.c"
 
 // Non binding direction control.
 
-int dc_elmers_get_direction()
+int dc_elmers_get_member_direction()
 {
 	char id;
 	int result;
@@ -23,7 +22,7 @@ int dc_elmers_get_direction()
 	return result;
 }
 
-int dc_elmers_set_direction(int value)
+int dc_elmers_set_member_direction(int value)
 {
 	char id;
 
@@ -53,10 +52,10 @@ int dc_elmers_apply_direction()
 	void target;
 	void ent;
 
-	target = dc_elmers_get_target();
-	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_member_target();
+	ent = dc_elmers_get_member_entity();
 
-	adjustment = dc_elmers_get_direction();
+	adjustment = dc_elmers_get_member_direction();
 
 	direction_target = get_entity_property(target, "position_direction");
 	direction_ent = get_entity_property(ent, "position_direction");

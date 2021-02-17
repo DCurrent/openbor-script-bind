@@ -1,11 +1,9 @@
 #include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_elmers/instance.c"
-
 
 // Base entity functions will act on.
 // Get
-void dc_elmers_get_entity()
+void dc_elmers_get_member_entity()
 {
 	char id;
 	void result;
@@ -24,7 +22,7 @@ void dc_elmers_get_entity()
 }
 
 // Set
-void dc_elmers_set_entity(void value)
+void dc_elmers_set_member_entity(void value)
 {
 	char id;
 
@@ -41,7 +39,7 @@ void dc_elmers_set_entity(void value)
 
 // Target entity (if any).
 // Get
-void dc_elmers_get_target()
+void dc_elmers_get_member_target()
 {
 	char id;
 	void result;
@@ -60,7 +58,7 @@ void dc_elmers_get_target()
 }
 
 // Set
-void dc_elmers_set_target(void value)
+void dc_elmers_set_member_target(void value)
 {
 	char id;
 
@@ -84,9 +82,9 @@ void dc_elmers_swap_entities()
 	void ent;
 	void target;
 
-	target = dc_elmers_get_target();
-	ent = dc_elmers_get_entity();
+	target = dc_elmers_get_member_target();
+	ent = dc_elmers_get_member_entity();
 
-	dc_elmers_set_entity(target);
-	dc_elmers_set_target(ent);
+	dc_elmers_set_member_entity(target);
+	dc_elmers_set_member_target(ent);
 }

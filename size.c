@@ -1,11 +1,10 @@
 #include "data/scripts/dc_elmers/config.h"
 
 #import "data/scripts/dc_elmers/entity.c"
-#import "data/scripts/dc_elmers/instance.c"
 
 // When finding an offset based on height, apply this
 // as a mutiplier.
-float dc_elmers_get_size_height_factor()
+float dc_elmers_get_member_size_height_factor()
 {
 	char id;
 	int result;
@@ -53,7 +52,7 @@ int dc_elmers_find_size_height(void ent)
 
 	if (!ent)
 	{
-		ent = dc_elmers_get_entity();
+		ent = dc_elmers_get_member_entity();
 	}
 
 	animation = DC_ELMERS_REACT_ANIMATION;// get_entity_property(target, "animation_id");
@@ -61,7 +60,7 @@ int dc_elmers_find_size_height(void ent)
 
 	sprite = getentityproperty(ent, "spritea", "sprite", animation, frame);
 
-	result = getgfxproperty(sprite, "height"); //*dc_elmers_get_size_height_factor();
+	result = getgfxproperty(sprite, "height"); //*dc_elmers_get_member_size_height_factor();
 
 	// Round and then remove the decimal to get 
 	// whole number.

@@ -1,11 +1,9 @@
 #include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_elmers/instance.c"
-
 // Accessors and Mutators.
 
 // X axis level position.
-int dc_elmers_get_level_x()
+int dc_elmers_get_member_level_x()
 {
 	char id;
 	int result;
@@ -23,7 +21,7 @@ int dc_elmers_get_level_x()
 	return result;
 }
 
-int dc_elmers_set_level_x(int value)
+int dc_elmers_set_member_level_x(int value)
 {
 	char id;
 
@@ -39,7 +37,7 @@ int dc_elmers_set_level_x(int value)
 }
 
 // Y axis level position.
-int dc_elmers_get_level_y()
+int dc_elmers_get_member_level_y()
 {
 	char id;
 	int result;
@@ -57,7 +55,7 @@ int dc_elmers_get_level_y()
 	return result;
 }
 
-int dc_elmers_set_level_y(int value)
+int dc_elmers_set_member_level_y(int value)
 {
 	char id;
 

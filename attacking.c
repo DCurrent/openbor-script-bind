@@ -1,11 +1,10 @@
 #include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_elmers/instance.c"
 #import "data/scripts/dc_elmers/entity.c"
 
 // Attacking turns the standard attack box on or off. 
 
-int dc_elmers_get_attacking()
+int dc_elmers_get_member_attacking()
 {
 	char id;
 	int result;
@@ -49,9 +48,9 @@ void dc_elmers_apply_attacking()
 	void ent;
 	int value;
 
-	ent = dc_elmers_get_entity();
+	ent = dc_elmers_get_member_entity();
 
-	value = dc_elmers_get_attacking();
+	value = dc_elmers_get_member_attacking();
 
 	set_entity_property(ent, "attack_state", value);
 }

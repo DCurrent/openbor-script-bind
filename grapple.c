@@ -28,7 +28,6 @@
 #import		"data/scripts/dc_elmers/direction.c"
 #import		"data/scripts/dc_elmers/disabled.c"
 #import		"data/scripts/dc_elmers/entity.c"
-#import		"data/scripts/dc_elmers/instance.c"
 #import		"data/scripts/dc_elmers/offset.c"
 #import		"data/scripts/dc_elmers/position_config.c"
 #import		"data/scripts/dc_elmers/size.c"
@@ -59,13 +58,13 @@ void dc_elmers_initialize_grapple_hold()
 	// Get target, and then get target's opponent. We set that
 	// the entity we are acting on. As in, the one binding itself
 	// to the grapple controller (target).
-	target = dc_elmers_get_target();
+	target = dc_elmers_get_member_target();
 	ent = get_entity_property(target, "opponent");
 
-	dc_elmers_set_entity(ent);
+	dc_elmers_set_member_entity(ent);
 
 	// Apply desired blast effect.
-	dc_elmers_set_blast(openborconstant("BLAST_NONE"));
+	dc_elmers_set_member_blast(openborconstant("BLAST_NONE"));
 	dc_elmers_apply_blast();
 
 	// Set binding to match a manually defined animation ID and
@@ -73,16 +72,16 @@ void dc_elmers_initialize_grapple_hold()
 	// to our default reaction animation. Later we set the frame
 	// property to apply whatever specific pose we want.
 	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_DEFINED") + openborconstant("BIND_ANIMATION_FRAME_DEFINED"));
-	dc_elmers_set_animation_id(DC_ELMERS_REACT_ANIMATION);
+	dc_elmers_set_bind_animation_id(DC_ELMERS_REACT_ANIMATION);
 
 	// Disable can damage property so we can't hit
 	// the grapple controller. We need to restore it
 	// when finished, and possibly with another script
 	// event, so we'll record the old value into bind
 	// tag property first.
-	dc_elmers_set_tag(getentityproperty(ent, "candamage"));
+	dc_elmers_set_member_tag(getentityproperty(ent, "candamage"));
 	dc_elmers_apply_tag();
-	dc_elmers_set_can_damage(DC_ELMERS_CAN_DAMAGE_NONE);
+	dc_elmers_set_member_can_damage(DC_ELMERS_CAN_DAMAGE_NONE);
 	dc_elmers_apply_can_damage();
 }
 
@@ -111,10 +110,10 @@ void dc_elmers_initialize_grapple()
 	// Get target, and then get target's opponent. We set that
 	// the entity we are acting on. As in, the one binding itself
 	// to the grapple controller (target).
-	target = dc_elmers_get_target();		
+	target = dc_elmers_get_member_target();		
 	ent = get_entity_property(target, "opponent");
 
-	dc_elmers_set_entity(ent);
+	dc_elmers_set_member_entity(ent);
 	
 	// Put us into a thrown state.
 	dc_elmers_apply_blast();
@@ -129,16 +128,16 @@ void dc_elmers_initialize_grapple()
 	// to our default reaction animation. Later we set the frame
 	// property to apply whatever specific pose we want.
 	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_DEFINED") + openborconstant("BIND_ANIMATION_FRAME_DEFINED"));
-	dc_elmers_set_animation_id(DC_ELMERS_REACT_ANIMATION);
+	dc_elmers_set_bind_animation_id(DC_ELMERS_REACT_ANIMATION);
 
 	// Disable can damage property so we can't hit
 	// the grapple controller. We need to restore it
 	// when finished, and possibly with another script
 	// event, so we'll record the old value into bind
 	// tag property first.
-	dc_elmers_set_tag(getentityproperty(ent, "candamage"));
+	dc_elmers_set_member_tag(getentityproperty(ent, "candamage"));
 	dc_elmers_apply_tag();
-	dc_elmers_set_can_damage(DC_ELMERS_CAN_DAMAGE_NONE);
+	dc_elmers_set_member_can_damage(DC_ELMERS_CAN_DAMAGE_NONE);
 	dc_elmers_apply_can_damage();
 }
 
@@ -162,10 +161,10 @@ void dc_elmers_initialize_reverse_grapple()
 	// Get target, and then get target's opponent. We set that
 	// the entity we are acting on. As in, the one binding itself
 	// to the grapple controller (target).
-	target = dc_elmers_get_target();
+	target = dc_elmers_get_member_target();
 	ent = get_entity_property(target, "opponent");
 
-	dc_elmers_set_entity(ent);
+	dc_elmers_set_member_entity(ent);
 
 	// Put us into a thrown state.
 		// dc_elmers_apply_blast();
@@ -180,22 +179,22 @@ void dc_elmers_initialize_reverse_grapple()
 	// to our default reaction animation. Later we set the frame
 	// property to apply whatever specific pose we want.
 	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_DEFINED") + openborconstant("BIND_ANIMATION_FRAME_DEFINED"));
-	dc_elmers_set_animation_id(DC_ELMERS_REACT_ANIMATION);
+	dc_elmers_set_bind_animation_id(DC_ELMERS_REACT_ANIMATION);
 
 	// Disable can damage property so we can't hit
 	// the grapple controller. We need to restore it
 	// when finished, and possibly with another script
 	// event, so we'll record the old value into bind
 	// tag property first.
-	dc_elmers_set_tag(getentityproperty(ent, "candamage"));
+	dc_elmers_set_member_tag(getentityproperty(ent, "candamage"));
 	dc_elmers_apply_tag();
-	dc_elmers_set_can_damage(DC_ELMERS_CAN_DAMAGE_NONE);
+	dc_elmers_set_member_can_damage(DC_ELMERS_CAN_DAMAGE_NONE);
 	dc_elmers_apply_can_damage();
 
 	// Bind self to current location.
-	dc_elmers_set_anchor_x(openborconstant("BIND_MODE_LEVEL"));
-	dc_elmers_set_anchor_y(openborconstant("BIND_MODE_LEVEL"));
-	dc_elmers_set_anchor_z(openborconstant("BIND_MODE_LEVEL"));
+	dc_elmers_set_member_anchor_x(openborconstant("BIND_MODE_LEVEL"));
+	dc_elmers_set_member_anchor_y(openborconstant("BIND_MODE_LEVEL"));
+	dc_elmers_set_member_anchor_z(openborconstant("BIND_MODE_LEVEL"));
 
 	int x;
 	int y;
@@ -207,11 +206,11 @@ void dc_elmers_initialize_reverse_grapple()
 	y = trunc(round(get_entity_property(ent, "position_y")));
 	z = trunc(round(get_entity_property(ent, "position_z")));
 
-	dc_elmers_set_invert_x(DC_ELMERS_INVERT_DISABLED);
+	dc_elmers_set_member_invert_x(DC_ELMERS_INVERT_DISABLED);
 
-	dc_elmers_set_offset_x(x);
-	dc_elmers_set_offset_y(y);
-	dc_elmers_set_offset_z(z);
+	dc_elmers_set_member_offset_x(x);
+	dc_elmers_set_member_offset_y(y);
+	dc_elmers_set_member_offset_z(z);
 }
 
 // Caskey, Damon V.
@@ -220,7 +219,7 @@ void dc_elmers_initialize_reverse_grapple()
 // Executes the current grapple/bind settings.
 void dc_elmers_apply_grapple()
 {	
-	if (dc_elmers_get_disabled() != DC_ELMERS_DISABLED_TRUE)
+	if (dc_elmers_get_member_disabled() != DC_ELMERS_DISABLED_TRUE)
 	{
 		dc_elmers_apply_blast();
 		dc_elmers_apply_can_damage();
@@ -240,9 +239,9 @@ void dc_elmers_end_grapple()
 {
 	void ent;
 
-	ent = dc_elmers_get_entity();
+	ent = dc_elmers_get_member_entity();
 
-	if (dc_elmers_get_disabled() != DC_ELMERS_DISABLED_TRUE)
+	if (dc_elmers_get_member_disabled() != DC_ELMERS_DISABLED_TRUE)
 	{
 		// Restore our previous candamage property
 		// before the grapple started.
@@ -253,7 +252,7 @@ void dc_elmers_end_grapple()
 
 		// Restore the candamage value we stored 
 		// in bind tag.
-		dc_elmers_set_can_damage(dc_elmers_set_tag_from_property());
+		dc_elmers_set_member_can_damage(dc_elmers_set_member_tag_from_property());
 		dc_elmers_apply_can_damage();
 	}	
 
@@ -289,9 +288,9 @@ void dc_elmers_conditional_end_grapple(int condition)
 {
 	void ent;
 
-	ent = dc_elmers_get_entity();
+	ent = dc_elmers_get_member_entity();
 
-	if (condition && dc_elmers_get_disabled() != DC_ELMERS_DISABLED_TRUE)
+	if (condition && dc_elmers_get_member_disabled() != DC_ELMERS_DISABLED_TRUE)
 	{
 		// Restore our previous candamage property
 		// before the grapple started.
@@ -302,10 +301,10 @@ void dc_elmers_conditional_end_grapple(int condition)
 
 		// Restore the candamage value we stored 
 		// in bind tag.
-		dc_elmers_set_can_damage(dc_elmers_set_tag_from_property());
+		dc_elmers_set_member_can_damage(dc_elmers_set_member_tag_from_property());
 		dc_elmers_apply_can_damage();
 
-		dc_elmers_set_disabled(DC_ELMERS_DISABLED_TRUE);
+		dc_elmers_set_member_disabled(DC_ELMERS_DISABLED_TRUE);
 	}
 
 	return ent;
@@ -321,9 +320,9 @@ void dc_elmers_end_grapple_hold()
 {
 	void ent;
 
-	ent = dc_elmers_get_entity();
+	ent = dc_elmers_get_member_entity();
 
-	if (dc_elmers_get_disabled() != DC_ELMERS_DISABLED_TRUE)
+	if (dc_elmers_get_member_disabled() != DC_ELMERS_DISABLED_TRUE)
 	{
 		// Restore our previous candamage property
 		// before the grapple started.
@@ -334,7 +333,7 @@ void dc_elmers_end_grapple_hold()
 
 		// Restore the candamage value we stored 
 		// in bind tag.
-		dc_elmers_set_can_damage(dc_elmers_set_tag_from_property());
+		dc_elmers_set_member_can_damage(dc_elmers_set_member_tag_from_property());
 		dc_elmers_apply_can_damage();
 	}	
 
@@ -363,11 +362,11 @@ void dc_elmers_apply_grab()
 	float pos_z;	
 	int direction;
 
-	if (dc_elmers_get_disabled() != DC_ELMERS_DISABLED_TRUE)
+	if (dc_elmers_get_member_disabled() != DC_ELMERS_DISABLED_TRUE)
 	{
 		// Entity is us. Target is the entity grabbing us.
-		ent = dc_elmers_get_entity();
-		target = dc_elmers_get_target();
+		ent = dc_elmers_get_member_entity();
+		target = dc_elmers_get_member_target();
 
 		// Dograb() takes care of the gazillion flags
 		// and actions needed for starting a grapple in 
@@ -408,8 +407,8 @@ void dc_elmers_apply_grab()
 // direction, takeaction, etc.
 void dc_elmers_apply_native_link()
 {
-	void target = dc_elmers_get_target();
-	void ent = dc_elmers_get_entity();
+	void target = dc_elmers_get_member_target();
+	void ent = dc_elmers_get_member_entity();
 	void link;
 
 	link = get_entity_property(target, "link");
@@ -429,7 +428,7 @@ void dc_elmers_apply_native_link()
 // Based on native internal ent_unlink() function.
 void dc_elmers_end_native_link()
 {
-	void target = dc_elmers_get_target();
+	void target = dc_elmers_get_member_target();
 	void link;
 
 	link = get_entity_property(target, "link");
@@ -465,7 +464,7 @@ int dc_elmers_disrupt_grapple()
 	int release_count;		// How many entities have been released?
 	int candamage;			// Can damage property.
 
-	target = dc_elmers_get_target();
+	target = dc_elmers_get_member_target();
 
 	release_count = 0;
 	entity_count = openborvariant("count_entities");
@@ -513,7 +512,7 @@ int dc_elmers_disrupt_grapple()
 		}
 
 		// Restore the entity's can damage properties if we messed with them.
-		candamage = get_bind_property(bind, "tag");
+		candamage = get_bind_property(bind, "meta_tag");
 
 		if (typeof(candamage) == openborconstant("VT_INTEGER"))
 		{
@@ -541,7 +540,7 @@ void dc_elmers_side_switch()
 {
 	void target;
 
-	target = dc_elmers_get_target();	
+	target = dc_elmers_get_member_target();	
 
 	performattack(target, DC_ELMERS_SWITCH_TO_BACK);
 

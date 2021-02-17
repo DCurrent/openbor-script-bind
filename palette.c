@@ -1,11 +1,10 @@
 #include "data/scripts/dc_elmers/config.h"
 
 #import "data/scripts/dc_elmers/entity.c"
-#import "data/scripts/dc_elmers/instance.c"
 
 
 // Get
-int dc_elmers_get_palette_match()
+int dc_elmers_get_member_palette_match()
 {
 	char id;
 	void result;
@@ -51,15 +50,15 @@ void dc_elmers_apply_palette_match()
 	void entity;
 
 	
-	target = dc_elmers_get_target();
-	entity = dc_elmers_get_entity();
+	target = dc_elmers_get_member_target();
+	entity = dc_elmers_get_member_entity();
 
 	if (!target || !entity)
 	{
 		return;
 	}
 
-	match = dc_elmers_get_palette_match();
+	match = dc_elmers_get_member_palette_match();
 
 	switch (match)
 	{
@@ -90,7 +89,7 @@ void dc_elmers_apply_palette_match()
 			// Use target's color table as entity's drawmethod table, and
 			// enable entity's drawmethod if it isn't already.
 			set_drawmethod_property(drawmethod_ent, "colorset_table", table);
-			set_drawmethod_property(drawmethod_ent, "enable", 1);			
+			set_drawmethod_property(drawmethod_ent, "enable", 1);
 
 			break;
 	}

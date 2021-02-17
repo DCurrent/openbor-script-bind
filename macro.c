@@ -3,7 +3,6 @@
 #import "data/scripts/dc_elmers/bind.c"
 #import "data/scripts/dc_elmers/direction.c"
 #import "data/scripts/dc_elmers/entity.c"
-#import "data/scripts/dc_elmers/instance.c"
 #import "data/scripts/dc_elmers/offset.c"
 #import "data/scripts/dc_elmers/palette.c"
 #import "data/scripts/dc_elmers/position.c"
@@ -11,6 +10,17 @@
 // These macro functions allow you to use a single function 
 // call to set up and run dc_elmers with pre-configured options 
 // that will handle the most common module building needs.
+
+// Caskey, Damon V.
+// 2020-08-13
+//
+// Destory the bound entity.
+void dc_elmers_quick_destroy()
+{
+	void ent = dc_elmers_get_member_entity(ent);
+
+	killentity(ent);
+}
 
 // Caskey, Damon V.
 // 2019-05-02
@@ -31,10 +41,10 @@ void dc_elmers_quick_particle(void ent)
 	dc_elmers_reset_instance();
 
 	// Seems redeundant, but gets default if ent is blank.
-	dc_elmers_set_entity(ent);	
-	ent = dc_elmers_get_entity(ent);		
+	dc_elmers_set_member_entity(ent);	
+	ent = dc_elmers_get_member_entity(ent);		
 	
-	target = dc_elmers_get_target();
+	target = dc_elmers_get_member_target();
 
 	bind = get_entity_property(ent, "bind");
 
@@ -47,7 +57,7 @@ void dc_elmers_quick_particle(void ent)
 	dc_elmers_alter_bind_direction(openborconstant("DIRECTION_ADJUST_SAME"));
 	
 	// Default sort to front.
-	dc_elmers_set_sorting(DC_ELMERS_SORT_FRONT);
+	dc_elmers_set_bind_sorting(DC_ELMERS_SORT_FRONT);
 		
 	// Default bind to animation + frame and remove on no match.
 	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_TARGET")+openborconstant("BIND_ANIMATION_REMOVE")+openborconstant("BIND_ANIMATION_FRAME_TARGET")+openborconstant("BIND_ANIMATION_FRAME_REMOVE"));
@@ -78,10 +88,10 @@ void dc_elmers_quick_particle_free(void ent)
 	dc_elmers_reset_instance();
 
 	// Seems redeundant, but gets default if ent is blank.
-	dc_elmers_set_entity(ent);
-	ent = dc_elmers_get_entity(ent);
+	dc_elmers_set_member_entity(ent);
+	ent = dc_elmers_get_member_entity(ent);
 
-	target = dc_elmers_get_target();
+	target = dc_elmers_get_member_target();
 
 	bind = get_entity_property(ent, "bind");
 
@@ -94,7 +104,7 @@ void dc_elmers_quick_particle_free(void ent)
 	dc_elmers_alter_bind_direction(openborconstant("DIRECTION_ADJUST_SAME"));
 
 	// Default sort to front.
-	dc_elmers_set_sorting(DC_ELMERS_SORT_FRONT);
+	dc_elmers_set_bind_sorting(DC_ELMERS_SORT_FRONT);
 
 	// Default bind to animation and remove on no match.
 	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_TARGET") + openborconstant("BIND_ANIMATION_REMOVE"));
@@ -102,34 +112,37 @@ void dc_elmers_quick_particle_free(void ent)
 	dc_elmers_quick_offset_to_bind();
 	dc_elmers_apply_palette_match();
 
-	log("\n dc_elmers_quick_particle_free: " + getentityproperty(bind, "defaultname"));
-
 	return bind;
 }
 
-// Caskey, Damon V.
-// 2019-10-15
-//
-// Bind to target, also using target's color table. Use this when we
-// need parts of our own body broken into layers or effects like the
-// blurred leg motion of Terry's Crack Shot, where the blur needs to
-// match the animation, position, and colors of main body.
-//
-// - Layered body parts
-// - Matched motions (Terry Bogard's Crack Shot).
-void dc_elmers_quick_overlay(void ent)
+/* Caskey, Damon V.
+* 2019-10-15
+*
+* Bind to target, also using target's color table. Use this when we
+* need parts of our own body broken into layers or effects like the
+* blurred leg motion of Terry's Crack Shot, where the blur needs to
+* match the animation, position, and colors of main body.
+*
+* - Layered body parts
+* - Matched motions (Terry Bogard's Crack Shot).
+*/
+void dc_elmers_quick_overlay(void ent, int layer_adjustment)
 {
 	void target;
 	void bind;
 	
-	// Reset instance so we don’t unintentional apply settings from previous uses.
+	/*
+	* Add overlay suffix to instance key, and reset the instance 
+	* so we can avoid conflicts.
+	*/
+	dc_elmers_set_instance(dc_elmers_get_instance() + "qo");
 	dc_elmers_reset_instance();
 
-	// Seems redeundant, but gets default if ent is blank.
-	dc_elmers_set_entity(ent);
-	ent = dc_elmers_get_entity(ent);
+	/* Seems redeundant, but gets default if ent is blank. */
+	dc_elmers_set_member_entity(ent);
+	ent = dc_elmers_get_member_entity(ent);
 
-	target = dc_elmers_get_target();
+	target = dc_elmers_get_member_target();
 
 	bind = get_entity_property(ent, "bind");
 
@@ -141,15 +154,15 @@ void dc_elmers_quick_overlay(void ent)
 
 	dc_elmers_alter_bind_direction(openborconstant("DIRECTION_ADJUST_SAME"));
 	
-	// Default sort to front.
-	dc_elmers_set_sorting(DC_ELMERS_SORT_FRONT);
+	/* Set sorting order. */
+	dc_elmers_set_bind_sorting(layer_adjustment);
 
-	// Default bind to animation + frame and remove on no match.
+	/* Default bind to animation + frame and remove on no match. */
 	dc_elmers_set_animation_match(openborconstant("BIND_ANIMATION_TARGET") + openborconstant("BIND_ANIMATION_REMOVE") + openborconstant("BIND_ANIMATION_FRAME_TARGET") + openborconstant("BIND_ANIMATION_FRAME_REMOVE"));
 
 	dc_elmers_quick_offset_to_bind();
 	
-	// Match to target's table.
+	/* Match to target's table. */
 	dc_elmers_set_palette_match(DC_ELMERS_PALETTE_MATCH_TABLE);	
 	dc_elmers_apply_palette_match();
 
@@ -170,10 +183,10 @@ void dc_elmers_quick_spot(void ent)
 	int sort_id;
 
 	// Seems redeundant, but gets default if ent is blank.
-	dc_elmers_set_entity(ent);
-	ent = dc_elmers_get_entity(ent);
+	dc_elmers_set_member_entity(ent);
+	ent = dc_elmers_get_member_entity(ent);
 
-	target = dc_elmers_get_target();
+	target = dc_elmers_get_member_target();
 
 	// Default to sort 1 in front of target.
 	// sort_id = get_entity_property(target, "sort_id");
@@ -206,7 +219,7 @@ int dc_elmers_find_front_sort()
 	int sort_cursor = 0;
 	int sort_result = 0;
 
-	target = dc_elmers_get_target();
+	target = dc_elmers_get_member_target();
 	
 	entity_count = openborvariant("count_entities");
 	sort_result = get_entity_property(target, "sort_id");

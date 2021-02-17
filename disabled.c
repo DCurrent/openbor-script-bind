@@ -1,6 +1,5 @@
 #include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_elmers/instance.c"
 #import "data/scripts/dc_elmers/entity.c"
 
 // When disabled, calls to apply binding are ignored. This is so we
@@ -8,7 +7,7 @@
 // partially through an animation without subsequent bind calls in 
 // the animation making a mess.
 
-int dc_elmers_get_disabled()
+int dc_elmers_get_member_disabled()
 {
 	char id;
 	int result;
@@ -26,7 +25,7 @@ int dc_elmers_get_disabled()
 	return result;
 }
 
-int dc_elmers_set_disabled(int value)
+int dc_elmers_set_member_disabled(int value)
 {
 	char id;
 

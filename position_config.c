@@ -1,13 +1,12 @@
 #include "data/scripts/dc_elmers/config.h"
 
-#import "data/scripts/dc_elmers/instance.c"
 
 // When adjusting toward or away from a position (as opposed
 // to outright warping to new coordinates) these values 
 // determine how far the entity is moved.
 
 // X axis.
-int dc_elmers_get_position_adjust_quantity_x()
+int dc_elmers_get_member_position_adjust_quantity_x()
 {
 	char id;
 	int result;
@@ -25,7 +24,7 @@ int dc_elmers_get_position_adjust_quantity_x()
 	return result;
 }
 
-int dc_elmers_set_position_adjust_quantity_x(int value)
+int dc_elmers_set_member_position_adjust_quantity_x(int value)
 {
 	char id;
 
@@ -41,7 +40,7 @@ int dc_elmers_set_position_adjust_quantity_x(int value)
 }
 
 // Y axis.
-int dc_elmers_get_position_adjust_quantity_y()
+int dc_elmers_get_member_position_adjust_quantity_y()
 {
 	char id;
 	int result;
@@ -59,7 +58,7 @@ int dc_elmers_get_position_adjust_quantity_y()
 	return result;
 }
 
-int dc_elmers_set_position_adjust_quantity_y(int value)
+int dc_elmers_set_member_position_adjust_quantity_y(int value)
 {
 	char id;
 
@@ -75,7 +74,7 @@ int dc_elmers_set_position_adjust_quantity_y(int value)
 }
 
 // Z axis.
-int dc_elmers_get_position_adjust_quantity_z()
+int dc_elmers_get_member_position_adjust_quantity_z()
 {
 	char id;
 	int result;
@@ -93,7 +92,7 @@ int dc_elmers_get_position_adjust_quantity_z()
 	return result;
 }
 
-int dc_elmers_set_position_adjust_quantity_z(int value)
+int dc_elmers_set_member_position_adjust_quantity_z(int value)
 {
 	char id;
 
@@ -112,7 +111,7 @@ int dc_elmers_set_position_adjust_quantity_z(int value)
 // base target position from (screen, a target entity, etc.).
 
 // X axis.
-int dc_elmers_get_anchor_x()
+int dc_elmers_get_member_anchor_x()
 {
 	char id;
 	int result;
@@ -130,7 +129,7 @@ int dc_elmers_get_anchor_x()
 	return result;
 }
 
-int dc_elmers_set_anchor_x(int value)
+int dc_elmers_set_member_anchor_x(int value)
 {
 	char id;
 
@@ -146,7 +145,7 @@ int dc_elmers_set_anchor_x(int value)
 }
 
 // Y axis.
-int dc_elmers_get_anchor_y()
+int dc_elmers_get_member_anchor_y()
 {
 	char id;
 	int result;
@@ -164,7 +163,7 @@ int dc_elmers_get_anchor_y()
 	return result;
 }
 
-int dc_elmers_set_anchor_y(int value)
+int dc_elmers_set_member_anchor_y(int value)
 {
 	char id;
 
@@ -180,7 +179,7 @@ int dc_elmers_set_anchor_y(int value)
 }
 
 // z axis.
-int dc_elmers_get_anchor_z()
+int dc_elmers_get_member_anchor_z()
 {
 	char id;
 	int result;
@@ -198,7 +197,7 @@ int dc_elmers_get_anchor_z()
 	return result;
 }
 
-int dc_elmers_set_anchor_z(int value)
+int dc_elmers_set_member_anchor_z(int value)
 {
 	char id;
 
